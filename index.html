@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TO DO — Portfolio</title>
+  <meta name="description" content="TO DO portfolio website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0b0d;
+      --bg-soft:#111114;
+      --panel:rgba(255,255,255,0.04);
+      --line:rgba(255,255,255,0.10);
+      --text:#f4efe7;
+      --muted:#bdb3a5;
+      --gold:#d3ae6a;
+      --ivory:#ece4d8;
+      --shadow:0 30px 80px rgba(0,0,0,0.42);
+      --max:1220px;
+      --radius:24px;
+      --transition:0.35s ease;
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:"Inter", sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    img, video{
+      width:100%;
+      display:block;
+    }
+
+    .container{
+      width:min(var(--max), calc(100% - 28px));
+      margin:0 auto;
+    }
+
+    .topbar{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      z-index:100;
+      background:rgba(11,11,13,0.55);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+
+    .topbar-inner{
+      min-height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .brand{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:0.24em;
+      color:var(--ivory);
+    }
+
+    .nav{
+      display:flex;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .nav a{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:0.16em;
+      color:var(--muted);
+      transition:var(--transition);
+    }
+
+    .nav a:hover{
+      color:var(--gold);
+    }
+
+    .hero{
+      min-height:100vh;
+      position:relative;
+      display:flex;
+      align-items:flex-end;
+      padding:110px 0 50px;
+      overflow:hidden;
+    }
+
+    .hero-bg{
+      position:absolute;
+      inset:0;
+      z-index:-2;
+      background:
+        linear-gradient(to top, rgba(11,11,13,0.92) 0%, rgba(11,11,13,0.32) 45%, rgba(11,11,13,0.18) 100%),
+        url("hero.jpg") center/cover no-repeat;
+      transform:scale(1.02);
+    }
+
+    .hero-content{
+      max-width:780px;
+    }
+
+    .eyebrow{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:0.24em;
+      color:var(--gold);
+      margin-bottom:16px;
+    }
+
+    .hero h1{
+      font-family:"Cormorant Garamond", serif;
+      font-size:clamp(60px, 10vw, 130px);
+      line-height:0.88;
+      font-weight:600;
+      margin-bottom:16px;
+      color:#f8f3ea;
+    }
+
+    .hero p{
+      max-width:620px;
+      color:#ded4c6;
+      font-size:16px;
+      line-height:1.95;
+      margin-bottom:26px;
+    }
+
+    .hero-buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    .btn{
+      min-height:52px;
+      padding:0 22px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-size:11px;
+      font-weight:600;
+      text-transform:uppercase;
+      letter-spacing:0.16em;
+      transition:var(--transition);
+    }
+
+    .btn-gold{
+      background:linear-gradient(135deg, #e2c589, #b6863d);
+      color:#111;
+      box-shadow:0 12px 30px rgba(211,174,106,0.20);
+    }
+
+    .btn-line{
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(255,255,255,0.03);
+      color:var(--ivory);
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .section{
+      padding:92px 0;
+    }
+
+    .section-head{
+      margin-bottom:30px;
+    }
+
+    .section-kicker{
+      color:var(--gold);
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:0.24em;
+      margin-bottom:10px;
+    }
+
+    .section-title{
+      font-family:"Cormorant Garamond", serif;
+      font-size:clamp(42px, 5vw, 72px);
+      line-height:0.95;
+      font-weight:600;
+      margin-bottom:14px;
+    }
+
+    .section-text{
+      max-width:760px;
+      color:var(--muted);
+      line-height:1.95;
+      font-size:16px;
+    }
+
+    .about-grid{
+      display:grid;
+      grid-template-columns:0.95fr 1.05fr;
+      gap:24px;
+      align-items:center;
+    }
+
+    .about-image{
+      border-radius:28px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      min-height:620px;
+    }
+
+    .about-image img{
+      height:100%;
+      object-fit:cover;
+    }
+
+    .about-card{
+      padding:32px;
+      border-radius:28px;
+      background:var(--panel);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(10px);
+    }
+
+    .about-card h3{
+      font-family:"Cormorant Garamond", serif;
+      font-size:38px;
+      font-weight:600;
+      margin-bottom:16px;
+    }
+
+    .about-card p{
+      color:var(--muted);
+      line-height:1.95;
+      margin-bottom:16px;
+    }
+
+    .info-list{
+      display:grid;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .info-item{
+      padding:14px 16px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.06);
+      background:rgba(255,255,255,0.02);
+      color:#e8dfd0;
+      font-size:14px;
+    }
+
+    .gallery-grid{
+      display:grid;
+      grid-template-columns:repeat(12, 1fr);
+      gap:18px;
+    }
+
+    .gallery-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:24px;
+      min-height:300px;
+      cursor:pointer;
+      transition:var(--transition);
+      box-shadow:var(--shadow);
+    }
+
+    .gallery-card:hover{
+      transform:translateY(-6px);
+    }
+
+    .gallery-card img{
+      height:100%;
+      object-fit:cover;
+      transition:transform 0.5s ease;
+    }
+
+    .gallery-card:hover img{
+      transform:scale(1.05);
+    }
+
+    .gallery-card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,0.78), rgba(0,0,0,0.08));
+    }
+
+    .gallery-info{
+      position:absolute;
+      left:18px;
+      right:18px;
+      bottom:18px;
+      z-index:2;
+    }
+
+    .gallery-info h4{
+      font-family:"Cormorant Garamond", serif;
+      font-size:30px;
+      margin-bottom:4px;
+    }
+
+    .gallery-info p{
+      color:#d9cfbf;
+      font-size:14px;
+    }
+
+    .span-7{ grid-column:span 7; }
+    .span-5{ grid-column:span 5; }
+    .span-4{ grid-column:span 4; }
+    .span-8{ grid-column:span 8; }
+
+    .video-wrap{
+      border-radius:28px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      border:1px solid var(--line);
+      background:#000;
+    }
+
+    .video-wrap video{
+      aspect-ratio:16 / 9;
+      object-fit:cover;
+      background:#000;
+    }
+
+    .social-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .social-card{
+      padding:26px;
+      border-radius:24px;
+      background:var(--panel);
+      border:1px solid var(--line);
+      transition:var(--transition);
+      box-shadow:var(--shadow);
+    }
+
+    .social-card:hover{
+      transform:translateY(-4px);
+      border-color:rgba(211,174,106,0.28);
+    }
+
+    .social-card h3{
+      font-family:"Cormorant Garamond", serif;
+      font-size:32px;
+      margin-bottom:10px;
+    }
+
+    .social-card p{
+      color:var(--muted);
+      line-height:1.85;
+      margin-bottom:16px;
+    }
+
+    .social-link{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:0.16em;
+      color:var(--gold);
+    }
+
+    .contact-box{
+      padding:32px;
+      border-radius:28px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+
+    .contact-box h3{
+      font-family:"Cormorant Garamond", serif;
+      font-size:42px;
+      margin-bottom:14px;
+    }
+
+    .contact-box p{
+      color:var(--muted);
+      line-height:1.95;
+      margin-bottom:18px;
+    }
+
+    .contact-links{
+      display:grid;
+      gap:12px;
+    }
+
+    .contact-link{
+      padding:16px 18px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.02);
+      transition:var(--transition);
+    }
+
+    .contact-link:hover{
+      color:var(--gold);
+      border-color:rgba(211,174,106,0.28);
+    }
+
+    footer{
+      padding:30px 0 46px;
+      border-top:1px solid rgba(255,255,255,0.06);
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .lightbox{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.84);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      opacity:0;
+      pointer-events:none;
+      transition:var(--transition);
+      z-index:200;
+      backdrop-filter:blur(10px);
+    }
+
+    .lightbox.open{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    .lightbox-inner{
+      position:relative;
+      width:min(1000px,100%);
+      max-height:90vh;
+      overflow:hidden;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:#0a0a0c;
+    }
+
+    .lightbox img{
+      max-height:90vh;
+      object-fit:contain;
+      background:#0a0a0c;
+    }
+
+    .lightbox-close{
+      position:absolute;
+      top:14px;
+      right:14px;
+      width:44px;
+      height:44px;
+      border:none;
+      border-radius:50%;
+      background:rgba(255,255,255,0.12);
+      color:white;
+      font-size:24px;
+      cursor:pointer;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(24px);
+      transition:0.8s ease;
+    }
+
+    .reveal.visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    @media (max-width: 980px){
+      .about-grid,
+      .social-grid{
+        grid-template-columns:1fr;
+      }
+
+      .gallery-grid{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .span-7,.span-5,.span-4,.span-8{
+        grid-column:span 1;
+      }
+
+      .about-image{
+        min-height:420px;
+      }
+    }
+
+    @media (max-width: 680px){
+      .nav{
+        display:none;
+      }
+
+      .gallery-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero{
+        min-height:88vh;
+      }
+
+      .hero h1{
+        line-height:0.95;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <a href="#home" class="brand">TO DO — NAME</a>
+
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#video">Video</a>
+        <a href="#social">Social</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" id="lightboxClose">×</button>
+      <img id="lightboxImage" src="" alt="Preview image">
+    </div>
+  </div>
+
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+
+    <div class="container">
+      <div class="hero-content reveal">
+        <div class="eyebrow">TO DO — ROLE / TITLE</div>
+        <h1>TO DO<br>NAME</h1>
+        <p>
+          TO DO — short introduction. Write 2–3 elegant lines here about who you are,
+          what you do, where you are based, and the kind of work or performances you do.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#gallery" class="btn btn-gold">View Portfolio</a>
+          <a href="#contact" class="btn btn-line">Contact</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-kicker">About</div>
+        <h2 class="section-title">TO DO — About</h2>
+        <p class="section-text">
+          TO DO — write a slightly longer bio here. This section can describe experience,
+          style, training, background, current work, or artistic identity.
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-image reveal">
+          <img src="about.jpg" alt="TO DO portrait">
+        </div>
+
+        <div class="about-card reveal">
+          <h3>TO DO — Bio</h3>
+          <p>
+            TO DO — add biography text here.
+          </p>
+          <p>
+            TO DO — add second paragraph here.
+          </p>
+
+          <div class="info-list">
+            <div class="info-item">TO DO — Based in</div>
+            <div class="info-item">TO DO — Profession</div>
+            <div class="info-item">TO DO — Representation / Agency</div>
+            <div class="info-item">TO DO — Specialties</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="gallery">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-kicker">Portfolio</div>
+        <h2 class="section-title">TO DO — Gallery</h2>
+        <p class="section-text">
+          TO DO — short text for your gallery section.
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-card span-7 reveal" data-image="gallery1.jpg">
+          <img src="gallery1.jpg" alt="Gallery image 1">
+          <div class="gallery-info">
+            <h4>TO DO</h4>
+            <p>TO DO</p>
+          </div>
+        </div>
+
+        <div class="gallery-card span-5 reveal" data-image="gallery2.jpg">
+          <img src="gallery2.jpg" alt="Gallery image 2">
+          <div class="gallery-info">
+            <h4>TO DO</h4>
+            <p>TO DO</p>
+          </div>
+        </div>
+
+        <div class="gallery-card span-4 reveal" data-image="gallery3.jpg">
+          <img src="gallery3.jpg" alt="Gallery image 3">
+          <div class="gallery-info">
+            <h4>TO DO</h4>
+            <p>TO DO</p>
+          </div>
+        </div>
+
+        <div class="gallery-card span-8 reveal" data-image="gallery4.jpg">
+          <img src="gallery4.jpg" alt="Gallery image 4">
+          <div class="gallery-info">
+            <h4>TO DO</h4>
+            <p>TO DO</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="video">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-kicker">Video</div>
+        <h2 class="section-title">TO DO — Featured Video</h2>
+        <p class="section-text">
+          TO DO — add a short description for your reel, film, dance clip, or portfolio video.
+        </p>
+      </div>
+
+      <div class="video-wrap reveal">
+        <video controls playsinline preload="metadata" poster="hero.jpg">
+          <source src="video.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="social">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-kicker">Social</div>
+        <h2 class="section-title">TO DO — Connect</h2>
+        <p class="section-text">
+          TO DO — short text inviting people to follow or contact you.
+        </p>
+      </div>
+
+      <div class="social-grid">
+        <a class="social-card reveal" href="https://instagram.com/" target="_blank">
+          <h3>Instagram</h3>
+          <p>TO DO — Instagram handle</p>
+          <div class="social-link">Open Profile</div>
+        </a>
+
+        <a class="social-card reveal" href="https://tiktok.com/" target="_blank">
+          <h3>TikTok</h3>
+          <p>TO DO — TikTok handle</p>
+          <div class="social-link">Open Profile</div>
+        </a>
+
+        <a class="social-card reveal" href="https://youtube.com/" target="_blank">
+          <h3>YouTube</h3>
+          <p>TO DO — YouTube channel</p>
+          <div class="social-link">Open Channel</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="contact-box reveal">
+        <h3>TO DO — Contact</h3>
+        <p>
+          TO DO — add a short contact text here.
+        </p>
+
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:TODO@email.com">TO DO@email.com</a>
+          <a class="contact-link" href="https://instagram.com/" target="_blank">TO DO — Instagram</a>
+          <a class="contact-link" href="https://tiktok.com/" target="_blank">TO DO — TikTok</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 TO DO — NAME</div>
+      <div>TO DO — ROLE / TITLE</div>
+    </div>
+  </footer>
+
+  <script>
+    const galleryCards = document.querySelectorAll(".gallery-card");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const lightboxClose = document.getElementById("lightboxClose");
+
+    galleryCards.forEach(card => {
+      card.addEventListener("click", () => {
+        const src = card.getAttribute("data-image");
+        lightboxImage.src = src;
+        lightbox.classList.add("open");
+      });
+    });
+
+    lightboxClose.addEventListener("click", () => {
+      lightbox.classList.remove("open");
+      lightboxImage.src = "";
+    });
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) {
+        lightbox.classList.remove("open");
+        lightboxImage.src = "";
+      }
+    });
+
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.12 });
+
+    reveals.forEach(item => observer.observe(item));
+  </script>
+</body>
+</html>
