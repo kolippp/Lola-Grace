@@ -8,24 +8,21 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#f7f3ee;
-      --bg-soft:#efe8df;
-      --panel:rgba(255,255,255,0.78);
-      --line:rgba(75,57,40,0.14);
-      --line-soft:rgba(75,57,40,0.08);
-      --text:#2c241d;
-      --muted:#7d6c5d;
-      --accent:#b58b62;
-      --accent-soft:#d8b89a;
-      --white:#fffdfa;
-      --shadow:0 18px 42px rgba(64,46,28,0.08);
-      --radius:20px;
-      --max:1160px;
+      --bg:#f2f2f2;
+      --bg-soft:#f7f7f7;
+      --panel:#ffffff;
+      --line:#dddddd;
+      --menuText:#32465f;
+      --heroText:#a9c7ed;
+      --bodyText:#1f1f1f;
+      --muted:#595959;
+      --shadow:0 12px 28px rgba(0,0,0,0.06);
       --transition:0.35s ease;
+      --max:1320px;
     }
 
     *{
@@ -40,15 +37,12 @@
 
     body{
       font-family:"Inter", sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(181,139,98,0.08), transparent 28%),
-        radial-gradient(circle at bottom right, rgba(216,184,154,0.08), transparent 24%),
-        var(--bg);
-      color:var(--text);
+      background:var(--bg);
+      color:var(--bodyText);
       overflow-x:hidden;
     }
 
-    body.loading{
+    body.menu-open{
       overflow:hidden;
     }
 
@@ -63,708 +57,277 @@
     }
 
     .container{
-      width:min(var(--max), calc(100% - 24px));
+      width:min(var(--max), calc(100% - 20px));
       margin:0 auto;
     }
 
-    /* loader */
-    .loader{
-      position:fixed;
-      inset:0;
-      z-index:300;
-      background:linear-gradient(180deg, #f8f4ef, #efe7dd);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      transition:opacity .9s ease, visibility .9s ease;
-    }
-
-    .loader.hidden{
-      opacity:0;
-      visibility:hidden;
-      pointer-events:none;
-    }
-
-    .loader-inner{
-      text-align:center;
-      display:grid;
-      gap:14px;
-    }
-
-    .loader-mark{
-      width:76px;
-      height:76px;
-      border-radius:50%;
-      border:1px solid rgba(181,139,98,0.35);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      margin:0 auto;
-      font-family:"Cormorant Garamond", serif;
-      font-size:24px;
-      color:var(--accent);
-      position:relative;
-      overflow:hidden;
-      box-shadow:0 0 0 10px rgba(181,139,98,0.05);
-    }
-
-    .loader-mark::before{
-      content:"";
-      position:absolute;
-      inset:-18%;
-      border-radius:50%;
-      border:2px solid transparent;
-      border-top-color:var(--accent);
-      border-right-color:rgba(181,139,98,0.35);
-      animation:spin 1.4s linear infinite;
-    }
-
-    .loader-text{
-      font-size:10px;
-      letter-spacing:.24em;
-      text-transform:uppercase;
-      color:var(--muted);
-      font-weight:600;
-    }
-
-    .loader-line{
-      width:150px;
-      height:2px;
-      background:rgba(75,57,40,0.10);
-      margin:0 auto;
-      border-radius:999px;
-      overflow:hidden;
-      position:relative;
-    }
-
-    .loader-line::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      width:42%;
-      background:linear-gradient(90deg, transparent, var(--accent), transparent);
-      animation:lineMove 1.7s ease-in-out infinite;
-    }
-
-    @keyframes spin{
-      to{ transform:rotate(360deg); }
-    }
-
-    @keyframes lineMove{
-      0%{ transform:translateX(-130%); }
-      100%{ transform:translateX(320%); }
-    }
-
-    /* topbar */
+    /* top bar */
     .topbar{
       position:fixed;
       top:0;
       left:0;
       width:100%;
       z-index:100;
-      background:rgba(247,243,238,0.82);
-      backdrop-filter:blur(14px);
-      border-bottom:1px solid var(--line-soft);
+      background:rgba(242,242,242,0.97);
+      border-bottom:1px solid var(--line);
     }
 
     .topbar-inner{
       min-height:64px;
       display:flex;
       align-items:center;
-      justify-content:space-between;
-      gap:16px;
+      justify-content:flex-end;
     }
 
-    .brand{
-      font-family:"Inter", sans-serif;
-      font-size:11px;
-      text-transform:uppercase;
-      letter-spacing:.20em;
-      color:var(--text);
-      font-weight:500;
-      white-space:nowrap;
-    }
-
-    .nav{
+    .menu-button{
+      width:64px;
+      height:64px;
+      border:none;
+      border-left:1px solid var(--line);
+      background:transparent;
+      cursor:pointer;
       display:flex;
       align-items:center;
-      gap:18px;
-      flex-wrap:wrap;
+      justify-content:center;
     }
 
-    .nav a{
+    .burger{
+      width:28px;
+      height:20px;
       position:relative;
-      font-size:10px;
-      text-transform:uppercase;
-      letter-spacing:.16em;
-      color:var(--muted);
-      transition:var(--transition);
-      padding:4px 0;
     }
 
-    .nav a::after{
-      content:"";
+    .burger span{
       position:absolute;
       left:0;
-      bottom:0;
       width:100%;
-      height:1px;
-      background:var(--accent);
-      transform:scaleX(0);
-      transform-origin:left;
-      transition:transform .35s ease;
-    }
-
-    .nav a:hover{
-      color:var(--text);
-    }
-
-    .nav a:hover::after{
-      transform:scaleX(1);
-    }
-
-    /* hero */
-    .hero{
-      min-height:92vh;
-      display:flex;
-      align-items:flex-end;
-      position:relative;
-      padding:90px 0 40px;
-      overflow:hidden;
-    }
-
-    .hero-bg{
-      position:absolute;
-      inset:0;
-      z-index:-2;
-      background:
-        linear-gradient(to top, rgba(247,243,238,0.92) 0%, rgba(247,243,238,0.32) 42%, rgba(247,243,238,0.12) 100%),
-        url("hero.jpg") center/cover no-repeat;
-      transform:scale(1.03);
-      animation:heroZoom 10s ease-in-out infinite alternate;
-    }
-
-    .hero-shade{
-      position:absolute;
-      inset:0;
-      z-index:-1;
-      background:
-        linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.18) 36%, rgba(255,255,255,0.02) 60%, transparent 100%);
-      animation:shineMove 12s linear infinite;
-      mix-blend-mode:screen;
-    }
-
-    @keyframes heroZoom{
-      from{ transform:scale(1.03); }
-      to{ transform:scale(1.07); }
-    }
-
-    @keyframes shineMove{
-      0%{ transform:translateX(-100%); }
-      100%{ transform:translateX(100%); }
-    }
-
-    .hero-content{
-      max-width:700px;
-      opacity:0;
-      animation:heroSlide 1.3s ease forwards;
-      animation-delay:.25s;
-    }
-
-    @keyframes heroSlide{
-      0%{
-        opacity:0;
-        transform:translateX(70px);
-      }
-      60%{
-        opacity:1;
-        transform:translateX(-8px);
-      }
-      100%{
-        opacity:1;
-        transform:translateX(0);
-      }
-    }
-
-    .eyebrow{
-      font-size:10px;
-      text-transform:uppercase;
-      letter-spacing:.22em;
-      color:var(--accent);
-      margin-bottom:12px;
-      font-weight:600;
-    }
-
-    .hero h1{
-      font-family:"Cormorant Garamond", serif;
-      font-size:clamp(44px, 8vw, 96px);
-      line-height:.9;
-      font-weight:600;
-      margin-bottom:12px;
-      color:#201a15;
-    }
-
-    .hero p{
-      max-width:560px;
-      color:#6d5d50;
-      line-height:1.8;
-      font-size:14px;
-      margin-bottom:20px;
-    }
-
-    .hero-buttons{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .btn{
-      min-height:44px;
-      padding:0 18px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
+      height:3px;
+      background:var(--menuText);
       border-radius:999px;
-      font-size:10px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      font-weight:600;
       transition:var(--transition);
     }
 
-    .btn-solid{
-      background:#2e251d;
-      color:#fffaf5;
-      box-shadow:var(--shadow);
+    .burger span:nth-child(1){ top:0; }
+    .burger span:nth-child(2){ top:8px; }
+    .burger span:nth-child(3){ top:16px; }
+
+    .menu-open .burger span:nth-child(1){
+      transform:translateY(8px) rotate(45deg);
+    }
+    .menu-open .burger span:nth-child(2){
+      opacity:0;
+    }
+    .menu-open .burger span:nth-child(3){
+      transform:translateY(-8px) rotate(-45deg);
     }
 
-    .btn-line{
-      border:1px solid rgba(75,57,40,0.16);
-      background:rgba(255,255,255,0.42);
-      color:var(--text);
-    }
-
-    .btn:hover{
-      transform:translateY(-2px);
-    }
-
-    /* sections */
-    .section{
-      padding:68px 0;
-    }
-
-    .section-head{
-      margin-bottom:22px;
-    }
-
-    .section-kicker{
-      color:var(--accent);
-      font-size:10px;
-      text-transform:uppercase;
-      letter-spacing:.20em;
-      margin-bottom:8px;
-      font-weight:600;
-    }
-
-    .section-title{
-      font-family:"Cormorant Garamond", serif;
-      font-size:clamp(30px, 4vw, 54px);
-      line-height:.98;
-      font-weight:600;
-      margin-bottom:10px;
-      letter-spacing:.01em;
-    }
-
-    .section-text{
-      max-width:680px;
-      color:var(--muted);
-      line-height:1.8;
-      font-size:14px;
-    }
-
-    .glass{
-      background:var(--panel);
-      border:1px solid var(--line-soft);
-      box-shadow:var(--shadow);
-      backdrop-filter:blur(12px);
-    }
-
-    /* about */
-    .about-grid{
-      display:grid;
-      grid-template-columns:.95fr 1.05fr;
-      gap:18px;
-      align-items:center;
-    }
-
-    .about-image{
-      border-radius:22px;
-      overflow:hidden;
-      min-height:500px;
-    }
-
-    .about-image img{
-      height:100%;
-      object-fit:cover;
-      transition:transform 1s ease;
-    }
-
-    .about-image:hover img{
-      transform:scale(1.03);
-    }
-
-    .about-card{
-      padding:24px;
-      border-radius:22px;
-    }
-
-    .about-card h3{
-      font-family:"Cormorant Garamond", serif;
-      font-size:32px;
-      font-weight:600;
-      margin-bottom:12px;
-    }
-
-    .about-card p{
-      color:var(--muted);
-      line-height:1.8;
-      font-size:14px;
-      margin-bottom:12px;
-    }
-
-    .info-list{
-      display:grid;
-      gap:10px;
-      margin-top:14px;
-    }
-
-    .info-item{
-      padding:12px 14px;
-      border-radius:14px;
-      border:1px solid var(--line-soft);
-      background:rgba(255,255,255,0.38);
-      color:#4a3a2d;
-      font-size:13px;
-      transition:var(--transition);
-    }
-
-    .info-item:hover{
-      transform:translateX(4px);
-      border-color:rgba(181,139,98,0.22);
-    }
-
-    /* gallery */
-    .gallery-grid{
-      display:grid;
-      grid-template-columns:repeat(4, 1fr);
-      gap:12px;
-    }
-
-    .gallery-card{
-      position:relative;
-      overflow:hidden;
-      border-radius:18px;
-      min-height:240px;
-      cursor:pointer;
-      transition:transform .35s ease, box-shadow .35s ease;
-      box-shadow:var(--shadow);
-    }
-
-    .gallery-card:hover{
-      transform:translateY(-5px);
-      box-shadow:0 22px 52px rgba(64,46,28,0.12);
-    }
-
-    .gallery-card img{
-      height:100%;
-      object-fit:cover;
-      transition:transform .6s ease;
-    }
-
-    .gallery-card:hover img{
-      transform:scale(1.04);
-    }
-
-    .gallery-card::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(to top, rgba(36,28,21,0.64), rgba(36,28,21,0.06));
-    }
-
-    .gallery-info{
-      position:absolute;
-      left:14px;
-      right:14px;
-      bottom:14px;
-      z-index:2;
-      transform:translateY(8px);
-      opacity:.92;
-      transition:var(--transition);
-    }
-
-    .gallery-card:hover .gallery-info{
-      transform:translateY(0);
-      opacity:1;
-    }
-
-    .gallery-info h4{
-      font-family:"Cormorant Garamond", serif;
-      font-size:22px;
-      margin-bottom:4px;
-      color:#fffaf5;
-    }
-
-    .gallery-info p{
-      color:#ede1d2;
-      font-size:12px;
-      line-height:1.5;
-    }
-
-    /* video */
-    .video-wrap{
-      border-radius:22px;
-      overflow:hidden;
-      border:1px solid var(--line-soft);
-      background:#000;
-      box-shadow:var(--shadow);
-      transform:translateY(0);
-      transition:var(--transition);
-    }
-
-    .video-wrap:hover{
-      transform:translateY(-3px);
-    }
-
-    .video-wrap video{
-      aspect-ratio:16/9;
-      object-fit:cover;
-      background:#000;
-    }
-
-    /* socials */
-    .social-grid{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:14px;
-    }
-
-    .social-card{
-      padding:22px;
-      border-radius:18px;
-      transition:var(--transition);
-    }
-
-    .social-card:hover{
-      transform:translateY(-5px);
-      border-color:rgba(181,139,98,0.22);
-    }
-
-    .social-card h3{
-      font-family:"Cormorant Garamond", serif;
-      font-size:28px;
-      margin-bottom:8px;
-    }
-
-    .social-card p{
-      color:var(--muted);
-      line-height:1.75;
-      font-size:13px;
-      margin-bottom:12px;
-    }
-
-    .social-link{
-      font-size:10px;
-      text-transform:uppercase;
-      letter-spacing:.14em;
-      color:var(--accent);
-      font-weight:600;
-    }
-
-    /* booking */
-    .booking-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:18px;
-      align-items:start;
-    }
-
-    .booking-card{
-      padding:24px;
-      border-radius:22px;
-    }
-
-    .booking-card h3{
-      font-family:"Cormorant Garamond", serif;
-      font-size:32px;
-      margin-bottom:12px;
-    }
-
-    .booking-card p{
-      color:var(--muted);
-      line-height:1.8;
-      font-size:14px;
-      margin-bottom:14px;
-    }
-
-    .booking-list{
-      display:grid;
-      gap:10px;
-    }
-
-    .booking-item{
-      padding:12px 14px;
-      border-radius:14px;
-      border:1px solid var(--line-soft);
-      background:rgba(255,255,255,0.38);
-      font-size:13px;
-      color:#4a3a2d;
-    }
-
-    .form{
-      display:grid;
-      gap:10px;
-      margin-top:8px;
-    }
-
-    .field{
-      width:100%;
-      padding:13px 14px;
-      border-radius:14px;
-      border:1px solid rgba(75,57,40,0.14);
-      background:rgba(255,255,255,0.58);
-      color:var(--text);
-      font:inherit;
-      font-size:14px;
-      outline:none;
-    }
-
-    .field::placeholder{
-      color:#8a7b6d;
-    }
-
-    textarea.field{
-      min-height:120px;
-      resize:vertical;
-    }
-
-    /* contact */
-    .contact-box{
-      padding:24px;
-      border-radius:22px;
-    }
-
-    .contact-box h3{
-      font-family:"Cormorant Garamond", serif;
-      font-size:34px;
-      margin-bottom:10px;
-    }
-
-    .contact-box p{
-      color:var(--muted);
-      line-height:1.8;
-      font-size:14px;
-      margin-bottom:14px;
-    }
-
-    .contact-links{
-      display:grid;
-      gap:10px;
-    }
-
-    .contact-link{
-      padding:14px 16px;
-      border-radius:14px;
-      border:1px solid var(--line-soft);
-      background:rgba(255,255,255,0.34);
-      transition:var(--transition);
-      font-size:13px;
-    }
-
-    .contact-link:hover{
-      color:var(--accent);
-      transform:translateX(4px);
-      border-color:rgba(181,139,98,0.22);
-    }
-
-    /* footer */
-    footer{
-      padding:24px 0 34px;
-      border-top:1px solid var(--line-soft);
-      color:var(--muted);
-      font-size:12px;
-    }
-
-    .footer-inner{
-      display:flex;
-      justify-content:space-between;
-      gap:16px;
-      flex-wrap:wrap;
-    }
-
-    /* lightbox */
-    .lightbox{
+    /* side menu */
+    .menu-overlay{
       position:fixed;
       inset:0;
-      background:rgba(30,23,18,0.72);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
+      background:rgba(0,0,0,0.18);
       opacity:0;
       pointer-events:none;
       transition:var(--transition);
-      z-index:220;
-      backdrop-filter:blur(10px);
+      z-index:110;
     }
 
-    .lightbox.open{
+    .menu-overlay.active{
       opacity:1;
       pointer-events:auto;
     }
 
-    .lightbox-inner{
+    .side-menu{
+      position:fixed;
+      top:0;
+      right:0;
+      width:min(430px, 82vw);
+      height:100vh;
+      background:#f3f3f3;
+      z-index:120;
+      transform:translateX(100%);
+      transition:transform 0.42s ease;
+      border-left:1px solid var(--line);
+      overflow-y:auto;
+    }
+
+    .side-menu.active{
+      transform:translateX(0);
+    }
+
+    .menu-inner{
+      padding-top:18px;
+      min-height:100%;
+    }
+
+    .menu-list{
+      list-style:none;
+    }
+
+    .menu-list a{
+      display:block;
+      padding:22px 28px;
+      font-family:"Montserrat", sans-serif;
+      font-weight:900;
+      font-size:clamp(22px, 4vw, 42px);
+      letter-spacing:0.01em;
+      color:var(--menuText);
+      text-transform:uppercase;
+      transition:var(--transition);
+    }
+
+    .menu-list a:hover{
+      transform:translateX(6px);
+    }
+
+    .menu-list .active-link{
+      display:inline-block;
+      border:4px solid #b9d8ff;
+      padding:2px 8px;
+      line-height:1;
+      border-radius:8px;
+    }
+
+    /* hero */
+    .hero{
       position:relative;
-      width:min(900px, 100%);
-      max-height:90vh;
+      min-height:86vh;
+      padding-top:64px;
       overflow:hidden;
-      border-radius:20px;
-      border:1px solid rgba(255,255,255,0.18);
-      background:#f7f3ee;
-      box-shadow:var(--shadow);
-      transform:scale(.96);
-      transition:transform .35s ease;
+      background:#b2bec9;
     }
 
-    .lightbox.open .lightbox-inner{
-      transform:scale(1);
-    }
-
-    .lightbox img{
-      max-height:90vh;
-      object-fit:contain;
-      background:#f7f3ee;
-    }
-
-    .lightbox-close{
+    .hero-image{
       position:absolute;
-      top:12px;
-      right:12px;
+      inset:64px 0 0 0;
+      background:url("hero.jpg") center top / cover no-repeat;
+    }
+
+    .hero-content{
+      position:relative;
+      min-height:calc(86vh - 64px);
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      padding:14px 0 14px;
+    }
+
+    .hero-top{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .hero-top-icons{
+      display:flex;
+      gap:8px;
+    }
+
+    .icon-box{
       width:40px;
       height:40px;
-      border:none;
-      border-radius:50%;
-      background:rgba(44,36,29,0.14);
-      color:#2c241d;
-      font-size:22px;
-      cursor:pointer;
+      background:rgba(30,40,55,0.88);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:6px;
+      font-size:20px;
+      font-weight:800;
+      box-shadow:var(--shadow);
     }
 
-    /* reveal */
+    .hero-middle{
+      flex:1;
+      display:flex;
+      align-items:center;
+    }
+
+    .name-row{
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      margin-top:-20px;
+    }
+
+    .name-word{
+      font-family:"Montserrat", sans-serif;
+      font-size:clamp(28px, 6vw, 72px);
+      font-weight:900;
+      line-height:0.95;
+      letter-spacing:0.01em;
+      text-transform:uppercase;
+      color:var(--heroText);
+    }
+
+    .hero-bottom{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:flex-start;
+    }
+
+    .social-row{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .social-round{
+      width:42px;
+      height:42px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#1f2730;
+      font-size:28px;
+      font-weight:900;
+    }
+
+    .role-line{
+      font-family:"Montserrat", sans-serif;
+      font-weight:900;
+      font-size:clamp(12px, 1.6vw, 18px);
+      color:#0d1420;
+      text-transform:uppercase;
+      letter-spacing:0.01em;
+    }
+
+    /* common */
+    .section{
+      padding:34px 0;
+    }
+
+    .section-title{
+      font-family:"Montserrat", sans-serif;
+      font-size:clamp(24px, 4vw, 44px);
+      font-weight:900;
+      text-transform:uppercase;
+      line-height:0.95;
+      letter-spacing:0.01em;
+      margin-bottom:18px;
+      color:var(--menuText);
+    }
+
+    .section-title.brown{
+      color:#9f7a4c;
+    }
+
+    .section-title.white{
+      color:#ffffff;
+    }
+
+    .small-text{
+      font-size:13px;
+      line-height:1.5;
+      color:#2a2a2a;
+    }
+
     .reveal{
       opacity:0;
-      transform:translateY(26px);
-      transition:opacity .8s ease, transform .8s ease;
+      transform:translateY(20px);
+      transition:0.7s ease;
     }
 
     .reveal.visible{
@@ -772,275 +335,708 @@
       transform:translateY(0);
     }
 
-    .reveal-left{
+    .hero-animate{
       opacity:0;
-      transform:translateX(-32px);
-      transition:opacity .85s ease, transform .85s ease;
+      animation:heroIn 1s ease forwards;
     }
 
-    .reveal-left.visible{
-      opacity:1;
-      transform:translateX(0);
+    .hero-animate.delay-1{ animation-delay:0.1s; }
+    .hero-animate.delay-2{ animation-delay:0.28s; }
+    .hero-animate.delay-3{ animation-delay:0.45s; }
+
+    @keyframes heroIn{
+      0%{
+        opacity:0;
+        transform:translateX(45px);
+      }
+      60%{
+        opacity:1;
+        transform:translateX(-6px);
+      }
+      100%{
+        opacity:1;
+        transform:translateX(0);
+      }
     }
 
-    .reveal-right{
-      opacity:0;
-      transform:translateX(32px);
-      transition:opacity .85s ease, transform .85s ease;
+    /* biography */
+    .biography{
+      background:#f2f2f2;
     }
 
-    .reveal-right.visible{
-      opacity:1;
-      transform:translateX(0);
+    .bio-grid{
+      display:grid;
+      grid-template-columns:1.15fr 0.85fr;
+      gap:0;
+      align-items:start;
+    }
+
+    .bio-left{
+      padding:22px 18px 28px 18px;
+    }
+
+    .bio-text{
+      max-width:720px;
+      font-size:13px;
+      line-height:1.48;
+      color:#2c2c2c;
+    }
+
+    .bio-text p{
+      margin-bottom:18px;
+    }
+
+    .bio-right{
+      border-left:1px solid var(--line);
+      background:#ece7df;
+    }
+
+    .stack-image{
+      width:100%;
+      border-bottom:1px solid var(--line);
+      overflow:hidden;
+    }
+
+    .stack-image img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+
+    /* photos */
+    .photos-section{
+      background:#ebe5dd;
+      padding:28px 0 30px;
+    }
+
+    .photos-grid{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:8px;
+    }
+
+    .photo-card{
+      aspect-ratio:1 / 1.08;
+      overflow:hidden;
+      background:#ddd;
+    }
+
+    .photo-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform 0.35s ease;
+    }
+
+    .photo-card:hover img{
+      transform:scale(1.04);
+    }
+
+    /* reel */
+    .reel-section{
+      background:#5e6978;
+      padding:22px 0 26px;
+    }
+
+    .reel-box{
+      max-width:760px;
+      background:#1b1b1b;
+      border:2px solid rgba(0,0,0,0.24);
+      overflow:hidden;
+    }
+
+    .reel-thumb{
+      position:relative;
+      display:block;
+    }
+
+    .reel-thumb img{
+      aspect-ratio:16 / 9;
+      object-fit:cover;
+    }
+
+    .play-button{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      width:86px;
+      height:60px;
+      background:#ff1b1b;
+      border-radius:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:var(--shadow);
+    }
+
+    .play-button::before{
+      content:"";
+      border-left:22px solid #fff;
+      border-top:14px solid transparent;
+      border-bottom:14px solid transparent;
+      margin-left:4px;
+    }
+
+    /* highlights */
+    .highlights-section{
+      background:#f1ece4;
+      padding:22px 0 18px;
+    }
+
+    .highlights-grid-top,
+    .highlights-grid-bottom{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:10px;
+    }
+
+    .highlights-grid-top{
+      margin-bottom:10px;
+    }
+
+    .highlight-card{
+      background:#ddd;
+      overflow:hidden;
+    }
+
+    .highlight-card.tall img{
+      aspect-ratio:9 / 16;
+      object-fit:cover;
+    }
+
+    .highlight-card.wide img{
+      aspect-ratio:16 / 10;
+      object-fit:cover;
+    }
+
+    /* teaching */
+    .teaching-section{
+      background:#f2f2f2;
+      padding:0;
+    }
+
+    .teaching-stack{
+      display:grid;
+      grid-template-columns:1fr;
+    }
+
+    .teach-panel{
+      position:relative;
+      overflow:hidden;
+      min-height:260px;
+      border-top:1px solid rgba(0,0,0,0.08);
+    }
+
+    .teach-panel img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .teach-text{
+      position:absolute;
+      font-family:"Montserrat", sans-serif;
+      font-weight:800;
+      text-transform:uppercase;
+      line-height:1.05;
+      letter-spacing:0.01em;
+    }
+
+    .teach-text.gold{ color:rgba(182,151,110,0.88); }
+    .teach-text.blue{ color:#adcaf0; }
+    .teach-text.gray{ color:#c7c7c7; }
+    .teach-text.white{ color:#ffffff; }
+
+    .teach-large{ font-size:clamp(24px, 5vw, 60px); }
+    .teach-mid{ font-size:clamp(20px, 4vw, 38px); }
+    .teach-small{ font-size:clamp(16px, 3vw, 28px); }
+
+    .teach-1{
+      left:10%;
+      top:46%;
+      transform:translateY(-50%);
+    }
+
+    .teach-2{
+      right:6%;
+      top:14%;
+      max-width:44%;
+      text-align:left;
+    }
+
+    .teach-3{
+      left:6%;
+      top:12%;
+      text-align:left;
+    }
+
+    .teach-4{
+      left:50%;
+      bottom:8%;
+      transform:translateX(-50%);
+      text-align:center;
+      width:92%;
+    }
+
+    .teach-5{
+      right:6%;
+      top:12%;
+      max-width:44%;
+      text-align:left;
+    }
+
+    /* booking */
+    .booking-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      align-items:start;
+    }
+
+    .booking-card{
+      padding:18px;
+      border-radius:18px;
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+
+    .booking-card h3{
+      font-family:"Montserrat", sans-serif;
+      font-size:20px;
+      font-weight:800;
+      margin-bottom:10px;
+      color:var(--menuText);
+      text-transform:uppercase;
+    }
+
+    .booking-card p{
+      color:var(--muted);
+      line-height:1.6;
+      font-size:13px;
+      margin-bottom:12px;
+    }
+
+    .booking-list{
+      display:grid;
+      gap:8px;
+    }
+
+    .booking-item{
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#fafafa;
+      font-size:12px;
+      color:#4a3a2d;
+    }
+
+    .form{
+      display:grid;
+      gap:8px;
+      margin-top:6px;
+    }
+
+    .field{
+      width:100%;
+      padding:11px 12px;
+      border-radius:12px;
+      border:1px solid rgba(75,57,40,0.14);
+      background:#fcfcfc;
+      color:var(--bodyText);
+      font:inherit;
+      font-size:13px;
+      outline:none;
+    }
+
+    textarea.field{
+      min-height:96px;
+      resize:vertical;
+    }
+
+    .submit-btn{
+      width:fit-content;
+      min-height:40px;
+      padding:0 16px;
+      border:none;
+      border-radius:999px;
+      background:#2e251d;
+      color:#fffaf5;
+      font-family:"Montserrat", sans-serif;
+      font-size:10px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    /* contact */
+    .contact-box{
+      padding:18px;
+      border-radius:18px;
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+
+    .contact-box h3{
+      font-family:"Montserrat", sans-serif;
+      font-size:22px;
+      font-weight:800;
+      margin-bottom:10px;
+      color:var(--menuText);
+      text-transform:uppercase;
+    }
+
+    .contact-box p{
+      color:var(--muted);
+      line-height:1.6;
+      font-size:13px;
+      margin-bottom:12px;
+    }
+
+    .contact-links{
+      display:grid;
+      gap:8px;
+    }
+
+    .contact-link{
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#fafafa;
+      transition:var(--transition);
+      font-size:12px;
+    }
+
+    .contact-link:hover{
+      color:#6f8fb6;
+      transform:translateX(4px);
+    }
+
+    /* footer */
+    footer{
+      padding:18px 0 28px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:11px;
+      background:#f2f2f2;
+    }
+
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
     }
 
     /* responsive */
     @media (max-width: 980px){
-      .about-grid,
-      .social-grid,
+      .bio-grid,
       .booking-grid{
         grid-template-columns:1fr;
       }
 
-      .gallery-grid{
-        grid-template-columns:repeat(2, 1fr);
+      .bio-right{
+        border-left:none;
+        border-top:1px solid var(--line);
       }
 
-      .about-image{
-        min-height:380px;
+      .highlights-grid-top,
+      .highlights-grid-bottom{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .nav{
+        display:none;
       }
     }
 
     @media (max-width: 680px){
-      .nav{
-        display:none;
-      }
-
-      .gallery-grid{
-        grid-template-columns:1fr;
-      }
-
-      .hero{
-        min-height:82vh;
-        padding:82px 0 34px;
-      }
-
-      .hero h1{
-        line-height:.94;
-      }
-
       .topbar-inner{
         min-height:58px;
       }
 
-      .container{
-        width:min(var(--max), calc(100% - 18px));
+      .menu-button{
+        width:58px;
+        height:58px;
+      }
+
+      .side-menu{
+        width:min(360px, 88vw);
+      }
+
+      .menu-list a{
+        padding:18px 20px;
+        font-size:30px;
+      }
+
+      .hero{
+        min-height:72vh;
+        padding-top:58px;
+      }
+
+      .hero-image{
+        inset:58px 0 0 0;
+      }
+
+      .hero-content{
+        min-height:calc(72vh - 58px);
+        padding:10px 0 12px;
+      }
+
+      .name-row{
+        margin-top:0;
+      }
+
+      .name-word{
+        font-size:clamp(24px, 6vw, 42px);
+      }
+
+      .icon-box{
+        width:34px;
+        height:34px;
+        font-size:16px;
+      }
+
+      .social-round{
+        width:34px;
+        height:34px;
+        font-size:22px;
+      }
+
+      .role-line{
+        font-size:12px;
+      }
+
+      .bio-left{
+        padding:16px 10px 20px 10px;
+      }
+
+      .bio-text{
+        font-size:12px;
+        line-height:1.42;
+      }
+
+      .bio-text p{
+        margin-bottom:14px;
       }
 
       .section{
-        padding:52px 0;
+        padding:26px 0;
+      }
+
+      .section-title{
+        font-size:clamp(18px, 5vw, 28px);
+        margin-bottom:12px;
+      }
+
+      .photos-grid{
+        grid-template-columns:repeat(4, 1fr);
+        gap:4px;
+      }
+
+      .photo-card{
+        aspect-ratio:1 / 1;
+      }
+
+      .highlights-grid-top,
+      .highlights-grid-bottom{
+        grid-template-columns:1fr;
+      }
+
+      .teach-panel{
+        min-height:200px;
       }
     }
   </style>
 </head>
-<body class="loading">
-
-  <div class="loader" id="loader">
-    <div class="loader-inner">
-      <div class="loader-mark">T</div>
-      <div class="loader-text">Loading Portfolio</div>
-      <div class="loader-line"></div>
-    </div>
-  </div>
+<body>
 
   <div class="topbar">
     <div class="container topbar-inner">
-      <a href="#home" class="brand">TO DO — NAME</a>
-
-      <nav class="nav">
-        <a href="#about">About</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#video">Video</a>
-        <a href="#social">Social</a>
-        <a href="#booking">Booking</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <button class="menu-button" id="menuButton" aria-label="Open menu">
+        <div class="burger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
     </div>
   </div>
 
-  <div class="lightbox" id="lightbox">
-    <div class="lightbox-inner">
-      <button class="lightbox-close" id="lightboxClose">×</button>
-      <img id="lightboxImage" src="" alt="Preview image">
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+  <aside class="side-menu" id="sideMenu">
+    <div class="menu-inner">
+      <ul class="menu-list">
+        <li><a href="#home" class="menu-link"><span class="active-link">Home</span></a></li>
+        <li><a href="#biography" class="menu-link">Biography</a></li>
+        <li><a href="#photos" class="menu-link">Photos</a></li>
+        <li><a href="#reel" class="menu-link">Demo Reel</a></li>
+        <li><a href="#videos" class="menu-link">Videos</a></li>
+        <li><a href="#teaching" class="menu-link">Teaching</a></li>
+        <li><a href="#booking" class="menu-link">Booking</a></li>
+        <li><a href="#contact" class="menu-link">Contact</a></li>
+      </ul>
     </div>
-  </div>
+  </aside>
 
   <section class="hero" id="home">
-    <div class="hero-bg"></div>
-    <div class="hero-shade"></div>
+    <div class="hero-image"></div>
 
-    <div class="container">
-      <div class="hero-content">
-        <div class="eyebrow">TO DO — ROLE / TITLE</div>
-        <h1>TO DO<br>NAME</h1>
-        <p>
-          TO DO — short introduction. Write 2–3 elegant lines here about who you are,
-          what you do, where you are based, and the kind of work or performances you do.
-        </p>
+    <div class="container hero-content">
+      <div class="hero-top hero-animate delay-1">
+        <div class="hero-top-icons">
+          <a href="https://youtube.com/" target="_blank" class="icon-box">▶</a>
+          <a href="https://facebook.com/" target="_blank" class="icon-box">f</a>
+        </div>
+      </div>
 
-        <div class="hero-buttons">
-          <a href="#gallery" class="btn btn-solid">View Portfolio</a>
-          <a href="#booking" class="btn btn-line">Book Now</a>
+      <div class="hero-middle">
+        <div class="name-row">
+          <div class="name-word hero-animate delay-2">TO DO</div>
+          <div class="name-word hero-animate delay-3">NAME</div>
+        </div>
+      </div>
+
+      <div class="hero-bottom hero-animate delay-3">
+        <div class="social-row">
+          <a href="https://tiktok.com/" target="_blank" class="social-round">♪</a>
+          <a href="https://instagram.com/" target="_blank" class="social-round">◎</a>
+        </div>
+
+        <div class="role-line">
+          TO DO / TO DO / TO DO / TO DO
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="about">
-    <div class="container">
-      <div class="section-head reveal">
-        <div class="section-kicker">About</div>
-        <h2 class="section-title">TO DO — About</h2>
-        <p class="section-text">
-          TO DO — write a slightly longer bio here. This section can describe experience,
-          style, training, background, current work, or artistic identity.
-        </p>
+  <section class="biography section" id="biography">
+    <div class="container bio-grid">
+      <div class="bio-left reveal">
+        <h2 class="section-title">Biography</h2>
+
+        <div class="bio-text">
+          <p>TO DO — write the main biography here. Add age, city, background, and recent work.</p>
+          <p>TO DO — write another paragraph here about training, important projects, performances, collaborations, awards, or specialties.</p>
+          <p>TO DO — write another paragraph here about style, personal story, artistic identity, and current career direction.</p>
+          <p>TO DO — write another paragraph here if needed. You can keep adding more paragraphs and this layout will continue the same way.</p>
+        </div>
       </div>
 
-      <div class="about-grid">
-        <div class="about-image reveal-left glass">
-          <img src="about.jpg" alt="TO DO portrait">
-        </div>
-
-        <div class="about-card reveal-right glass">
-          <h3>TO DO — Bio</h3>
-          <p>TO DO — add biography text here.</p>
-          <p>TO DO — add second paragraph here.</p>
-
-          <div class="info-list">
-            <div class="info-item">TO DO — Based in</div>
-            <div class="info-item">TO DO — Profession</div>
-            <div class="info-item">TO DO — Representation / Agency</div>
-            <div class="info-item">TO DO — Specialties</div>
-          </div>
-        </div>
+      <div class="bio-right reveal">
+        <div class="stack-image"><img src="bio-side1.jpg" alt="TO DO image 1"></div>
+        <div class="stack-image"><img src="bio-side2.jpg" alt="TO DO image 2"></div>
+        <div class="stack-image"><img src="bio-side3.jpg" alt="TO DO image 3"></div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="gallery">
+  <section class="photos-section" id="photos">
     <div class="container">
-      <div class="section-head reveal">
-        <div class="section-kicker">Portfolio</div>
-        <h2 class="section-title">TO DO — Gallery</h2>
-        <p class="section-text">
-          TO DO — short text for your gallery section.
-        </p>
-      </div>
+      <h2 class="section-title brown reveal">Photos</h2>
 
-      <div class="gallery-grid">
-        <div class="gallery-card reveal" data-image="gallery1.jpg">
-          <img src="gallery1.jpg" alt="Gallery image 1">
-          <div class="gallery-info">
-            <h4>TO DO</h4>
-            <p>TO DO</p>
-          </div>
-        </div>
-
-        <div class="gallery-card reveal" data-image="gallery2.jpg">
-          <img src="gallery2.jpg" alt="Gallery image 2">
-          <div class="gallery-info">
-            <h4>TO DO</h4>
-            <p>TO DO</p>
-          </div>
-        </div>
-
-        <div class="gallery-card reveal" data-image="gallery3.jpg">
-          <img src="gallery3.jpg" alt="Gallery image 3">
-          <div class="gallery-info">
-            <h4>TO DO</h4>
-            <p>TO DO</p>
-          </div>
-        </div>
-
-        <div class="gallery-card reveal" data-image="gallery4.jpg">
-          <img src="gallery4.jpg" alt="Gallery image 4">
-          <div class="gallery-info">
-            <h4>TO DO</h4>
-            <p>TO DO</p>
-          </div>
-        </div>
+      <div class="photos-grid reveal">
+        <div class="photo-card"><img src="photo1.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo2.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo3.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo4.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo5.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo6.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo7.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo8.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo9.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo10.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo11.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo12.jpg" alt=""></div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="video">
+  <section class="reel-section" id="reel">
     <div class="container">
-      <div class="section-head reveal">
-        <div class="section-kicker">Video</div>
-        <h2 class="section-title">TO DO — Featured Video</h2>
-        <p class="section-text">
-          TO DO — add a short description for your reel, film, dance clip, or portfolio video.
-        </p>
-      </div>
+      <h2 class="section-title white reveal">Demo Reel</h2>
 
-      <div class="video-wrap reveal">
-        <video controls playsinline preload="metadata" poster="hero.jpg">
-          <source src="video.mp4" type="video/mp4">
-        </video>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="social">
-    <div class="container">
-      <div class="section-head reveal">
-        <div class="section-kicker">Social</div>
-        <h2 class="section-title">TO DO — Connect</h2>
-        <p class="section-text">
-          TO DO — short text inviting people to follow or contact you.
-        </p>
-      </div>
-
-      <div class="social-grid">
-        <a class="social-card glass reveal-left" href="https://instagram.com/" target="_blank">
-          <h3>Instagram</h3>
-          <p>TO DO — Instagram handle</p>
-          <div class="social-link">Open Profile</div>
+      <div class="reel-box reveal">
+        <a class="reel-thumb" href="https://youtube.com/" target="_blank">
+          <img src="reel-thumb.jpg" alt="Reel thumbnail">
+          <div class="play-button"></div>
         </a>
+      </div>
+    </div>
+  </section>
 
-        <a class="social-card glass reveal" href="https://tiktok.com/" target="_blank">
-          <h3>TikTok</h3>
-          <p>TO DO — TikTok handle</p>
-          <div class="social-link">Open Profile</div>
-        </a>
+  <section class="highlights-section" id="videos">
+    <div class="container">
+      <h2 class="section-title reveal">Video Highlights</h2>
 
-        <a class="social-card glass reveal-right" href="https://youtube.com/" target="_blank">
-          <h3>YouTube</h3>
-          <p>TO DO — YouTube channel</p>
-          <div class="social-link">Open Channel</div>
-        </a>
+      <div class="highlights-grid-top reveal">
+        <div class="highlight-card tall"><img src="highlight1.jpg" alt=""></div>
+        <div class="highlight-card tall"><img src="highlight2.jpg" alt=""></div>
+        <div class="highlight-card tall"><img src="highlight3.jpg" alt=""></div>
+      </div>
+
+      <div class="highlights-grid-bottom reveal">
+        <div class="highlight-card wide"><img src="highlight4.jpg" alt=""></div>
+        <div class="highlight-card wide"><img src="highlight5.jpg" alt=""></div>
+        <div class="highlight-card wide"><img src="highlight6.jpg" alt=""></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="teaching-section" id="teaching">
+    <div class="teaching-stack">
+      <div class="teach-panel reveal">
+        <img src="teaching1.jpg" alt="">
+        <div class="teach-text gold teach-large teach-1">Teaching</div>
+      </div>
+
+      <div class="teach-panel reveal">
+        <img src="teaching2.jpg" alt="">
+        <div class="teach-text gray teach-small teach-2">
+          Solo,<br>
+          Duo,<br>
+          Trio,<br>
+          &amp; Group<br>
+          Choreo
+        </div>
+      </div>
+
+      <div class="teach-panel reveal">
+        <img src="teaching3.jpg" alt="">
+        <div class="teach-text white teach-small teach-3">
+          All<br>
+          Genres
+        </div>
+        <div class="teach-text blue teach-mid teach-4">
+          Contemporary Ballet<br>
+          Master Class
+        </div>
+      </div>
+
+      <div class="teach-panel reveal">
+        <img src="teaching4.jpg" alt="">
+        <div class="teach-text gray teach-small teach-5">
+          Improv, Tricks,<br>
+          Stretching &amp;<br>
+          Technique<br>
+          Privates
+        </div>
       </div>
     </div>
   </section>
 
   <section class="section" id="booking">
     <div class="container">
-      <div class="section-head reveal">
-        <div class="section-kicker">Booking</div>
-        <h2 class="section-title">TO DO — Book a Performance</h2>
-        <p class="section-text">
-          TO DO — add a short booking message here. Explain what kinds of events,
-          performances, collaborations, or appearances are available.
-        </p>
-      </div>
+      <h2 class="section-title reveal">Booking</h2>
 
       <div class="booking-grid">
-        <div class="booking-card glass reveal-left">
+        <div class="booking-card reveal">
           <h3>Available For</h3>
-          <p>
-            TO DO — describe the kinds of bookings accepted.
-          </p>
+          <p>TO DO — describe the types of bookings accepted.</p>
 
           <div class="booking-list">
             <div class="booking-item">TO DO — Private Events</div>
@@ -1051,18 +1047,16 @@
           </div>
         </div>
 
-        <div class="booking-card glass reveal-right">
+        <div class="booking-card reveal">
           <h3>Booking Request</h3>
-          <p>
-            TO DO — add instructions here.
-          </p>
+          <p>TO DO — add instructions here.</p>
 
-          <form class="form" onsubmit="event.preventDefault(); alert('Replace this with your real booking form or Formspree later.');">
+          <form class="form" onsubmit="event.preventDefault(); alert('Replace this with your real booking form later.');">
             <input class="field" type="text" placeholder="Your name" required>
             <input class="field" type="email" placeholder="Your email" required>
             <input class="field" type="text" placeholder="Event / venue">
             <textarea class="field" placeholder="Tell me about your request"></textarea>
-            <button class="btn btn-solid" type="submit">Send Request</button>
+            <button class="submit-btn" type="submit">Send Request</button>
           </form>
         </div>
       </div>
@@ -1071,11 +1065,9 @@
 
   <section class="section" id="contact">
     <div class="container">
-      <div class="contact-box glass reveal">
-        <h3>TO DO — Contact</h3>
-        <p>
-          TO DO — add a short contact text here.
-        </p>
+      <div class="contact-box reveal">
+        <h3>Contact</h3>
+        <p>TO DO — add a short contact text here.</p>
 
         <div class="contact-links">
           <a class="contact-link" href="mailto:TODO@email.com">TO DO@email.com</a>
@@ -1094,57 +1086,46 @@
   </footer>
 
   <script>
-    const loader = document.getElementById("loader");
+    const menuButton = document.getElementById("menuButton");
+    const sideMenu = document.getElementById("sideMenu");
+    const menuOverlay = document.getElementById("menuOverlay");
+    const menuLinks = document.querySelectorAll(".menu-link");
+    const body = document.body;
 
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        loader.classList.add("hidden");
-        document.body.classList.remove("loading");
-      }, 1100);
-    });
+    function openMenu(){
+      sideMenu.classList.add("active");
+      menuOverlay.classList.add("active");
+      body.classList.add("menu-open");
+    }
 
-    const galleryCards = document.querySelectorAll(".gallery-card");
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImage = document.getElementById("lightboxImage");
-    const lightboxClose = document.getElementById("lightboxClose");
+    function closeMenu(){
+      sideMenu.classList.remove("active");
+      menuOverlay.classList.remove("active");
+      body.classList.remove("menu-open");
+    }
 
-    galleryCards.forEach(card => {
-      card.addEventListener("click", () => {
-        const src = card.getAttribute("data-image");
-        lightboxImage.src = src;
-        lightbox.classList.add("open");
-      });
-    });
-
-    lightboxClose.addEventListener("click", () => {
-      lightbox.classList.remove("open");
-      lightboxImage.src = "";
-    });
-
-    lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox) {
-        lightbox.classList.remove("open");
-        lightboxImage.src = "";
+    menuButton.addEventListener("click", () => {
+      if(sideMenu.classList.contains("active")){
+        closeMenu();
+      } else {
+        openMenu();
       }
     });
 
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        lightbox.classList.remove("open");
-        lightboxImage.src = "";
-      }
-    });
+    menuOverlay.addEventListener("click", closeMenu);
+    menuLinks.forEach(link => link.addEventListener("click", closeMenu));
 
-    const revealItems = document.querySelectorAll(".reveal, .reveal-left, .reveal-right");
+    const reveals = document.querySelectorAll(".reveal");
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
+        if(entry.isIntersecting){
           entry.target.classList.add("visible");
         }
       });
     }, { threshold: 0.12 });
 
-    revealItems.forEach(item => observer.observe(item));
+    reveals.forEach(item => observer.observe(item));
   </script>
+
 </body>
 </html>
