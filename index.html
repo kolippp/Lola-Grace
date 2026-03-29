@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TO DO — Portfolio</title>
+  <meta name="description" content="TO DO portfolio website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f7f3ee;
+      --bg-soft:#efe8df;
+      --panel:rgba(255,255,255,0.74);
+      --line:rgba(75,57,40,0.14);
+      --line-soft:rgba(75,57,40,0.08);
+      --text:#2c241d;
+      --muted:#7d6c5d;
+      --accent:#b58b62;
+      --accent-soft:#d8b89a;
+      --white:#fffdfa;
+      --shadow:0 24px 60px rgba(64,46,28,0.10);
+      --radius:24px;
+      --max:1220px;
+      --transition:0.38s ease;
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:"Inter", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(181,139,98,0.08), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(216,184,154,0.08), transparent 24%),
+        var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+
+    body.loading{
+      overflow:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    img, video{
+      display:block;
+      width:100%;
+    }
+
+    .container{
+      width:min(var(--max), calc(100% - 30px));
+      margin:0 auto;
+    }
+
+    /* loader */
+    .loader{
+      position:fixed;
+      inset:0;
+      z-index:300;
+      background:linear-gradient(180deg, #f8f4ef, #efe7dd);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:opacity .9s ease, visibility .9s ease;
+    }
+
+    .loader.hidden{
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+    }
+
+    .loader-inner{
+      text-align:center;
+      display:grid;
+      gap:18px;
+    }
+
+    .loader-mark{
+      width:88px;
+      height:88px;
+      border-radius:50%;
+      border:1px solid rgba(181,139,98,0.35);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin:0 auto;
+      font-family:"Cormorant Garamond", serif;
+      font-size:28px;
+      color:var(--accent);
+      position:relative;
+      overflow:hidden;
+      box-shadow:0 0 0 12px rgba(181,139,98,0.05);
+    }
+
+    .loader-mark::before{
+      content:"";
+      position:absolute;
+      inset:-18%;
+      border-radius:50%;
+      border:2px solid transparent;
+      border-top-color:var(--accent);
+      border-right-color:rgba(181,139,98,0.35);
+      animation:spin 1.4s linear infinite;
+    }
+
+    .loader-text{
+      font-size:11px;
+      letter-spacing:.28em;
+      text-transform:uppercase;
+      color:var(--muted);
+      font-weight:600;
+    }
+
+    .loader-line{
+      width:180px;
+      height:2px;
+      background:rgba(75,57,40,0.10);
+      margin:0 auto;
+      border-radius:999px;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .loader-line::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      width:42%;
+      background:linear-gradient(90deg, transparent, var(--accent), transparent);
+      animation:lineMove 1.7s ease-in-out infinite;
+    }
+
+    @keyframes spin{
+      to{ transform:rotate(360deg); }
+    }
+
+    @keyframes lineMove{
+      0%{ transform:translateX(-130%); }
+      100%{ transform:translateX(320%); }
+    }
+
+    /* topbar */
+    .topbar{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      z-index:100;
+      background:rgba(247,243,238,0.78);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line-soft);
+    }
+
+    .topbar-inner{
+      min-height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .brand{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.22em;
+      color:var(--text);
+      font-weight:500;
+      white-space:nowrap;
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:22px;
+      flex-wrap:wrap;
+    }
+
+    .nav a{
+      position:relative;
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.20em;
+      color:var(--muted);
+      transition:var(--transition);
+      padding:6px 0;
+    }
+
+    .nav a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:0;
+      width:100%;
+      height:1px;
+      background:var(--accent);
+      transform:scaleX(0);
+      transform-origin:left;
+      transition:transform .35s ease;
+    }
+
+    .nav a:hover{
+      color:var(--text);
+    }
+
+    .nav a:hover::after{
+      transform:scaleX(1);
+    }
+
+    /* hero */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:flex-end;
+      position:relative;
+      padding:110px 0 54px;
+      overflow:hidden;
+    }
+
+    .hero-bg{
+      position:absolute;
+      inset:0;
+      z-index:-2;
+      background:
+        linear-gradient(to top, rgba(247,243,238,0.92) 0%, rgba(247,243,238,0.30) 42%, rgba(247,243,238,0.12) 100%),
+        url("hero.jpg") center/cover no-repeat;
+      transform:scale(1.04);
+      animation:heroZoom 10s ease-in-out infinite alternate;
+    }
+
+    .hero-shade{
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      background:
+        linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.18) 36%, rgba(255,255,255,0.02) 60%, transparent 100%);
+      animation:shineMove 12s linear infinite;
+      mix-blend-mode:screen;
+    }
+
+    @keyframes heroZoom{
+      from{ transform:scale(1.04); }
+      to{ transform:scale(1.09); }
+    }
+
+    @keyframes shineMove{
+      0%{ transform:translateX(-100%); }
+      100%{ transform:translateX(100%); }
+    }
+
+    .hero-content{
+      max-width:800px;
+      opacity:0;
+      animation:heroSlide 1.5s ease forwards;
+      animation-delay:.35s;
+    }
+
+    @keyframes heroSlide{
+      0%{
+        opacity:0;
+        transform:translateX(90px);
+      }
+      60%{
+        opacity:1;
+        transform:translateX(-10px);
+      }
+      100%{
+        opacity:1;
+        transform:translateX(0);
+      }
+    }
+
+    .eyebrow{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.28em;
+      color:var(--accent);
+      margin-bottom:16px;
+      font-weight:600;
+    }
+
+    .hero h1{
+      font-family:"Cormorant Garamond", serif;
+      font-size:clamp(60px, 10vw, 132px);
+      line-height:.88;
+      font-weight:600;
+      margin-bottom:16px;
+      color:#201a15;
+    }
+
+    .hero p{
+      max-width:620px;
+      color:#6d5d50;
+      line-height:1.95;
+      font-size:16px;
+      margin-bottom:28px;
+    }
+
+    .hero-buttons{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      min-height:52px;
+      padding:0 22px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:999px;
+      font-size:11px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-weight:600;
+      transition:var(--transition);
+    }
+
+    .btn-solid{
+      background:#2e251d;
+      color:#fffaf5;
+      box-shadow:var(--shadow);
+    }
+
+    .btn-line{
+      border:1px solid rgba(75,57,40,0.16);
+      background:rgba(255,255,255,0.42);
+      color:var(--text);
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+    }
+
+    /* sections */
+    .section{
+      padding:96px 0;
+    }
+
+    .section-head{
+      margin-bottom:30px;
+    }
+
+    .section-kicker{
+      color:var(--accent);
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.24em;
+      margin-bottom:10px;
+      font-weight:600;
+    }
+
+    .section-title{
+      font-family:"Cormorant Garamond", serif;
+      font-size:clamp(42px, 5vw, 76px);
+      line-height:.95;
+      font-weight:600;
+      margin-bottom:14px;
+    }
+
+    .section-text{
+      max-width:760px;
+      color:var(--muted);
+      line-height:1.95;
+      font-size:16px;
+    }
+
+    .glass{
+      background:var(--panel);
+      border:1px solid var(--line-soft);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(12px);
+    }
+
+    /* about */
+    .about-grid{
+      display:grid;
+      grid-template-columns:.95fr 1.05fr;
+      gap:24px;
+      align-items:center;
+    }
+
+    .about-image{
+      border-radius:28px;
+      overflow:hidden;
+      min-height:620px;
+    }
+
+    .about-image img{
+      height:100%;
+      object-fit:cover;
+      transition:transform 1s ease;
+    }
+
+    .about-image:hover img{
+      transform:scale(1.04);
+    }
+
+    .about-card{
+      padding:34px;
+      border-radius:28px;
+    }
+
+    .about-card h3{
+      font-family:"Cormorant Garamond", serif;
+      font-size:40px;
+      font-weight:600;
+      margin-bottom:16px;
+    }
+
+    .about-card p{
+      color:var(--muted);
+      line-height:1.95;
+      margin-bottom:16px;
+    }
+
+    .info-list{
+      display:grid;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .info-item{
+      padding:14px 16px;
+      border-radius:16px;
+      border:1px solid var(--line-soft);
+      background:rgba(255,255,255,0.38);
+      color:#4a3a2d;
+      font-size:14px;
+      transition:var(--transition);
+    }
+
+    .info-item:hover{
+      transform:translateX(6px);
+      border-color:rgba(181,139,98,0.22);
+    }
+
+    /* gallery */
+    .gallery-grid{
+      display:grid;
+      grid-template-columns:repeat(12, 1fr);
+      gap:18px;
+    }
+
+    .gallery-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:24px;
+      min-height:310px;
+      cursor:pointer;
+      transition:transform .42s ease, box-shadow .42s ease;
+      box-shadow:var(--shadow);
+    }
+
+    .gallery-card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 30px 70px rgba(64,46,28,0.14);
+    }
+
+    .gallery-card img{
+      height:100%;
+      object-fit:cover;
+      transition:transform .7s ease;
+    }
+
+    .gallery-card:hover img{
+      transform:scale(1.05);
+    }
+
+    .gallery-card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top, rgba(36,28,21,0.68), rgba(36,28,21,0.08));
+    }
+
+    .gallery-info{
+      position:absolute;
+      left:18px;
+      right:18px;
+      bottom:18px;
+      z-index:2;
+      transform:translateY(10px);
+      opacity:.92;
+      transition:var(--transition);
+    }
+
+    .gallery-card:hover .gallery-info{
+      transform:translateY(0);
+      opacity:1;
+    }
+
+    .gallery-info h4{
+      font-family:"Cormorant Garamond", serif;
+      font-size:30px;
+      margin-bottom:4px;
+      color:#fffaf5;
+    }
+
+    .gallery-info p{
+      color:#ede1d2;
+      font-size:14px;
+    }
+
+    .span-7{ grid-column:span 7; }
+    .span-5{ grid-column:span 5; }
+    .span-4{ grid-column:span 4; }
+    .span-8{ grid-column:span 8; }
+
+    /* video */
+    .video-wrap{
+      border-radius:28px;
+      overflow:hidden;
+      border:1px solid var(--line-soft);
+      background:#000;
+      box-shadow:var(--shadow);
+      transform:translateY(0);
+      transition:var(--transition);
+    }
+
+    .video-wrap:hover{
+      transform:translateY(-4px);
+    }
+
+    .video-wrap video{
+      aspect-ratio:16/9;
+      object-fit:cover;
+      background:#000;
+    }
+
+    /* socials */
+    .social-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:18px;
+    }
+
+    .social-card{
+      padding:28px;
+      border-radius:24px;
+      transition:var(--transition);
+    }
+
+    .social-card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(181,139,98,0.22);
+    }
+
+    .social-card h3{
+      font-family:"Cormorant Garamond", serif;
+      font-size:34px;
+      margin-bottom:10px;
+    }
+
+    .social-card p{
+      color:var(--muted);
+      line-height:1.85;
+      margin-bottom:16px;
+    }
+
+    .social-link{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:var(--accent);
+      font-weight:600;
+    }
+
+    /* contact */
+    .contact-box{
+      padding:34px;
+      border-radius:28px;
+    }
+
+    .contact-box h3{
+      font-family:"Cormorant Garamond", serif;
+      font-size:44px;
+      margin-bottom:14px;
+    }
+
+    .contact-box p{
+      color:var(--muted);
+      line-height:1.95;
+      margin-bottom:18px;
+    }
+
+    .contact-links{
+      display:grid;
+      gap:12px;
+    }
+
+    .contact-link{
+      padding:16px 18px;
+      border-radius:18px;
+      border:1px solid var(--line-soft);
+      background:rgba(255,255,255,0.34);
+      transition:var(--transition);
+    }
+
+    .contact-link:hover{
+      color:var(--accent);
+      transform:translateX(6px);
+      border-color:rgba(181,139,98,0.22);
+    }
+
+    /* footer */
+    footer{
+      padding:30px 0 46px;
+      border-top:1px solid var(--line-soft);
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    /* lightbox */
+    .lightbox{
+      position:fixed;
+      inset:0;
+      background:rgba(30,23,18,0.72);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      opacity:0;
+      pointer-events:none;
+      transition:var(--transition);
+      z-index:220;
+      backdrop-filter:blur(10px);
+    }
+
+    .lightbox.open{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    .lightbox-inner{
+      position:relative;
+      width:min(1000px, 100%);
+      max-height:90vh;
+      overflow:hidden;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:#f7f3ee;
+      box-shadow:var(--shadow);
+      transform:scale(.96);
+      transition:transform .35s ease;
+    }
+
+    .lightbox.open .lightbox-inner{
+      transform:scale(1);
+    }
+
+    .lightbox img{
+      max-height:90vh;
+      object-fit:contain;
+      background:#f7f3ee;
+    }
+
+    .lightbox-close{
+      position:absolute;
+      top:14px;
+      right:14px;
+      width:44px;
+      height:44px;
+      border:none;
+      border-radius:50%;
+      background:rgba(44,36,29,0.14);
+      color:#2c241d;
+      font-size:24px;
+      cursor:pointer;
+    }
+
+    /* reveal */
+    .reveal{
+      opacity:0;
+      transform:translateY(34px);
+      transition:opacity .85s ease, transform .85s ease;
+    }
+
+    .reveal.visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .reveal-left{
+      opacity:0;
+      transform:translateX(-42px);
+      transition:opacity .9s ease, transform .9s ease;
+    }
+
+    .reveal-left.visible{
+      opacity:1;
+      transform:translateX(0);
+    }
+
+    .reveal-right{
+      opacity:0;
+      transform:translateX(42px);
+      transition:opacity .9s ease, transform .9s ease;
+    }
+
+    .reveal-right.visible{
+      opacity:1;
+      transform:translateX(0);
+    }
+
+    /* responsive */
+    @media (max-width: 980px){
+      .about-grid,
+      .social-grid{
+        grid-template-columns:1fr;
+      }
+
+      .gallery-grid{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .span-7,.span-5,.span-4,.span-8{
+        grid-column:span 1;
+      }
+
+      .about-image{
+        min-height:420px;
+      }
+    }
+
+    @media (max-width: 680px){
+      .nav{
+        display:none;
+      }
+
+      .gallery-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero{
+        min-height:88vh;
+      }
+
+      .hero h1{
+        line-height:.94;
+      }
+    }
+  </style>
+</head>
+<body class="loading">
+
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <div class="loader-mark">T</div>
+      <div class="loader-text">Loading Portfolio</div>
+      <div class="loader-line"></div>
+    </div>
+  </div>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <a href="#home" class="brand">TO DO — NAME</a>
+
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#video">Video</a>
+        <a href="#social">Social</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" id="lightboxClose">×</button>
+      <img id="lightboxImage" src="" alt="Preview image">
+    </div>
+  </div>
+
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-shade"></div>
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="eyebrow">TO DO — ROLE / TITLE</div>
+        <h1>TO DO<br>NAME</h1>
+        <p>
+          TO DO — short introduction. Write 2–3 elegant lines here about who you are,
+          what you do, where you are based, and the kind of work or performances you do.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#gallery" class="btn btn-solid">View Portfolio</a>
+          <a href="#contact" class="btn btn-line">Contact</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-kicker">About</div>
+        <h2 class="section-title">TO DO — About</h2>
+        <p class="section-text">
+          TO DO — write a slightly longer bio here. This section can describe experience,
+          style, training, background, current work, or artistic identity.
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-image reveal-left glass">
+          <img src="about.jpg" alt="TO DO portrait">
+        </div>
+
+        <div class="about-card reveal-right glass">
+          <h3>TO DO — Bio</h3>
+          <p>TO DO — add biography text here.</p>
+          <p>TO DO — add second paragraph here.</p>
+
+          <div class="info-list">
+            <div class="info-item">TO DO — Based in</div>
+            <div class="info-item">TO DO — Profession</div>
+            <div class="info-item">TO DO — Representation / Agency</div>
+            <div class="info-item">TO DO — Specialties</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="gallery">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-kicker">Portfolio</div>
+        <h2 class="section-title">TO DO — Gallery</h2>
+        <p class="section-text">
+          TO DO — short text for your gallery section.
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-card span-7 reveal" data-image="gallery1.jpg">
+          <img src="gallery1.jpg" alt="Gallery image 1">
+          <div class="gallery-info">
+            <h4>TO DO</h4>
+            <p>TO DO</p>
+          </div>
+        </div>
+
+        <div class="gallery-card span-5 reveal" data-image="gallery2.jpg">
+          <img src="gallery2.jpg" alt="Gallery image 2">
+          <div class="gallery-info">
+            <h4>TO DO</h4>
+            <p>TO DO</p>
+          </div>
+        </div>
+
+        <div class="gallery-card span-4 reveal" data-image="gallery3.jpg">
+          <img src="gallery3.jpg" alt="Gallery image 3">
+          <div class="gallery-info">
+            <h4>TO DO</h4>
+            <p>TO DO</p>
+          </div>
+        </div>
+
+        <div class="gallery-card span-8 reveal" data-image="gallery4.jpg">
+          <img src="gallery4.jpg" alt="Gallery image 4">
+          <div class="gallery-info">
+            <h4>TO DO</h4>
+            <p>TO DO</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="video">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-kicker">Video</div>
+        <h2 class="section-title">TO DO — Featured Video</h2>
+        <p class="section-text">
+          TO DO — add a short description for your reel, film, dance clip, or portfolio video.
+        </p>
+      </div>
+
+      <div class="video-wrap reveal">
+        <video controls playsinline preload="metadata" poster="hero.jpg">
+          <source src="video.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="social">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-kicker">Social</div>
+        <h2 class="section-title">TO DO — Connect</h2>
+        <p class="section-text">
+          TO DO — short text inviting people to follow or contact you.
+        </p>
+      </div>
+
+      <div class="social-grid">
+        <a class="social-card glass reveal-left" href="https://instagram.com/" target="_blank">
+          <h3>Instagram</h3>
+          <p>TO DO — Instagram handle</p>
+          <div class="social-link">Open Profile</div>
+        </a>
+
+        <a class="social-card glass reveal" href="https://tiktok.com/" target="_blank">
+          <h3>TikTok</h3>
+          <p>TO DO — TikTok handle</p>
+          <div class="social-link">Open Profile</div>
+        </a>
+
+        <a class="social-card glass reveal-right" href="https://youtube.com/" target="_blank">
+          <h3>YouTube</h3>
+          <p>TO DO — YouTube channel</p>
+          <div class="social-link">Open Channel</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="contact-box glass reveal">
+        <h3>TO DO — Contact</h3>
+        <p>
+          TO DO — add a short contact text here.
+        </p>
+
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:TODO@email.com">TO DO@email.com</a>
+          <a class="contact-link" href="https://instagram.com/" target="_blank">TO DO — Instagram</a>
+          <a class="contact-link" href="https://tiktok.com/" target="_blank">TO DO — TikTok</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 TO DO — NAME</div>
+      <div>TO DO — ROLE / TITLE</div>
+    </div>
+  </footer>
+
+  <script>
+    const loader = document.getElementById("loader");
+
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        loader.classList.add("hidden");
+        document.body.classList.remove("loading");
+      }, 1100);
+    });
+
+    const galleryCards = document.querySelectorAll(".gallery-card");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const lightboxClose = document.getElementById("lightboxClose");
+
+    galleryCards.forEach(card => {
+      card.addEventListener("click", () => {
+        const src = card.getAttribute("data-image");
+        lightboxImage.src = src;
+        lightbox.classList.add("open");
+      });
+    });
+
+    lightboxClose.addEventListener("click", () => {
+      lightbox.classList.remove("open");
+      lightboxImage.src = "";
+    });
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) {
+        lightbox.classList.remove("open");
+        lightboxImage.src = "";
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        lightbox.classList.remove("open");
+        lightboxImage.src = "";
+      }
+    });
+
+    const revealItems = document.querySelectorAll(".reveal, .reveal-left, .reveal-right");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealItems.forEach(item => observer.observe(item));
+  </script>
+</body>
+</html>
