@@ -56,6 +56,10 @@
       width:100%;
     }
 
+    button, input, textarea{
+      font:inherit;
+    }
+
     .container{
       width:min(var(--max), calc(100% - 20px));
       margin:0 auto;
@@ -141,7 +145,7 @@
       position:fixed;
       top:0;
       right:0;
-      width:min(430px, 82vw);
+      width:min(300px, 72vw);
       height:100vh;
       background:#f3f3f3;
       z-index:120;
@@ -156,7 +160,7 @@
     }
 
     .menu-inner{
-      padding-top:18px;
+      padding-top:14px;
       min-height:100%;
     }
 
@@ -166,10 +170,10 @@
 
     .menu-list a{
       display:block;
-      padding:22px 28px;
+      padding:14px 18px;
       font-family:"Montserrat", sans-serif;
       font-weight:900;
-      font-size:clamp(22px, 4vw, 42px);
+      font-size:clamp(18px, 3vw, 28px);
       letter-spacing:0.01em;
       color:var(--menuText);
       text-transform:uppercase;
@@ -177,12 +181,12 @@
     }
 
     .menu-list a:hover{
-      transform:translateX(6px);
+      transform:translateX(4px);
     }
 
     .menu-list .active-link{
       display:inline-block;
-      border:4px solid #b9d8ff;
+      border:3px solid #b9d8ff;
       padding:2px 8px;
       line-height:1;
       border-radius:8px;
@@ -191,7 +195,7 @@
     /* hero */
     .hero{
       position:relative;
-      min-height:86vh;
+      min-height:72vh;
       padding-top:64px;
       overflow:hidden;
       background:#b2bec9;
@@ -205,11 +209,11 @@
 
     .hero-content{
       position:relative;
-      min-height:calc(86vh - 64px);
+      min-height:calc(72vh - 64px);
       display:flex;
       flex-direction:column;
       justify-content:space-between;
-      padding:14px 0 14px;
+      padding:12px 0 14px;
     }
 
     .hero-top{
@@ -222,18 +226,28 @@
       gap:8px;
     }
 
-    .icon-box{
-      width:40px;
-      height:40px;
-      background:rgba(30,40,55,0.88);
-      color:#fff;
+    .top-social{
+      width:36px;
+      height:36px;
       display:flex;
       align-items:center;
       justify-content:center;
-      border-radius:6px;
-      font-size:20px;
-      font-weight:800;
+      border-radius:50%;
+      background:rgba(28,38,52,0.9);
+      color:#fff;
       box-shadow:var(--shadow);
+      transition:var(--transition);
+    }
+
+    .top-social:hover{
+      transform:translateY(-2px);
+    }
+
+    .top-social svg{
+      width:18px;
+      height:18px;
+      fill:currentColor;
+      display:block;
     }
 
     .hero-middle{
@@ -274,15 +288,29 @@
       align-items:center;
     }
 
-    .social-round{
-      width:42px;
-      height:42px;
+    .hero-social{
+      width:36px;
+      height:36px;
       display:flex;
       align-items:center;
       justify-content:center;
+      border-radius:50%;
+      background:rgba(28,38,52,0.08);
       color:#1f2730;
-      font-size:28px;
-      font-weight:900;
+      border:1px solid rgba(28,38,52,0.12);
+      transition:var(--transition);
+    }
+
+    .hero-social:hover{
+      transform:translateY(-2px);
+      background:rgba(28,38,52,0.12);
+    }
+
+    .hero-social svg{
+      width:18px;
+      height:18px;
+      fill:currentColor;
+      display:block;
     }
 
     .role-line{
@@ -296,17 +324,18 @@
 
     /* common */
     .section{
-      padding:34px 0;
+      padding:26px 0;
+      background:var(--bg);
     }
 
     .section-title{
       font-family:"Montserrat", sans-serif;
-      font-size:clamp(24px, 4vw, 44px);
+      font-size:clamp(18px, 5vw, 28px);
       font-weight:900;
       text-transform:uppercase;
       line-height:0.95;
       letter-spacing:0.01em;
-      margin-bottom:18px;
+      margin-bottom:12px;
       color:var(--menuText);
     }
 
@@ -314,8 +343,8 @@
       color:#9f7a4c;
     }
 
-    .section-title.white{
-      color:#ffffff;
+    .section-title.dark{
+      color:var(--menuText);
     }
 
     .small-text{
@@ -361,7 +390,7 @@
 
     /* biography */
     .biography{
-      background:#f2f2f2;
+      background:var(--bg);
     }
 
     .bio-grid{
@@ -372,18 +401,18 @@
     }
 
     .bio-left{
-      padding:22px 18px 28px 18px;
+      padding:16px 10px 20px 10px;
     }
 
     .bio-text{
       max-width:720px;
-      font-size:13px;
-      line-height:1.48;
+      font-size:12px;
+      line-height:1.42;
       color:#2c2c2c;
     }
 
     .bio-text p{
-      margin-bottom:18px;
+      margin-bottom:14px;
     }
 
     .bio-right{
@@ -405,18 +434,18 @@
 
     /* photos */
     .photos-section{
-      background:#ebe5dd;
-      padding:28px 0 30px;
+      background:var(--bg);
+      padding:26px 0;
     }
 
     .photos-grid{
       display:grid;
       grid-template-columns:repeat(4, 1fr);
-      gap:8px;
+      gap:4px;
     }
 
     .photo-card{
-      aspect-ratio:1 / 1.08;
+      aspect-ratio:1 / 1;
       overflow:hidden;
       background:#ddd;
     }
@@ -434,15 +463,16 @@
 
     /* reel */
     .reel-section{
-      background:#5e6978;
-      padding:22px 0 26px;
+      background:var(--bg);
+      padding:26px 0;
     }
 
     .reel-box{
       max-width:760px;
       background:#1b1b1b;
-      border:2px solid rgba(0,0,0,0.24);
+      border:1px solid rgba(0,0,0,0.18);
       overflow:hidden;
+      box-shadow:var(--shadow);
     }
 
     .reel-thumb{
@@ -480,8 +510,8 @@
 
     /* highlights */
     .highlights-section{
-      background:#f1ece4;
-      padding:22px 0 18px;
+      background:var(--bg);
+      padding:26px 0;
     }
 
     .highlights-grid-top,
@@ -498,6 +528,7 @@
     .highlight-card{
       background:#ddd;
       overflow:hidden;
+      box-shadow:var(--shadow);
     }
 
     .highlight-card.tall img{
@@ -512,7 +543,7 @@
 
     /* teaching */
     .teaching-section{
-      background:#f2f2f2;
+      background:var(--bg);
       padding:0;
     }
 
@@ -524,7 +555,7 @@
     .teach-panel{
       position:relative;
       overflow:hidden;
-      min-height:260px;
+      min-height:200px;
       border-top:1px solid rgba(0,0,0,0.08);
     }
 
@@ -560,7 +591,7 @@
 
     .teach-2{
       right:6%;
-      top:14%;
+      top:12%;
       max-width:44%;
       text-align:left;
     }
@@ -693,26 +724,46 @@
       color:var(--muted);
       line-height:1.6;
       font-size:13px;
-      margin-bottom:12px;
+      margin-bottom:14px;
     }
 
-    .contact-links{
-      display:grid;
-      gap:8px;
+    .contact-socials{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:6px;
     }
 
-    .contact-link{
-      padding:12px 14px;
-      border-radius:12px;
+    .contact-circle{
+      width:42px;
+      height:42px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:#ffffff;
       border:1px solid var(--line);
-      background:#fafafa;
+      color:var(--menuText);
+      box-shadow:var(--shadow);
       transition:var(--transition);
-      font-size:12px;
     }
 
-    .contact-link:hover{
-      color:#6f8fb6;
-      transform:translateX(4px);
+    .contact-circle:hover{
+      transform:translateY(-2px);
+      background:#f8fbff;
+    }
+
+    .contact-circle svg{
+      width:18px;
+      height:18px;
+      fill:currentColor;
+      display:block;
+    }
+
+    .contact-email{
+      margin-top:12px;
+      font-size:12px;
+      color:var(--muted);
     }
 
     /* footer */
@@ -721,7 +772,7 @@
       border-top:1px solid var(--line);
       color:var(--muted);
       font-size:11px;
-      background:#f2f2f2;
+      background:var(--bg);
     }
 
     .footer-inner{
@@ -747,10 +798,6 @@
       .highlights-grid-bottom{
         grid-template-columns:1fr 1fr;
       }
-
-      .nav{
-        display:none;
-      }
     }
 
     @media (max-width: 680px){
@@ -764,12 +811,12 @@
       }
 
       .side-menu{
-        width:min(360px, 88vw);
+        width:min(300px, 82vw);
       }
 
       .menu-list a{
-        padding:18px 20px;
-        font-size:30px;
+        padding:14px 16px;
+        font-size:22px;
       }
 
       .hero{
@@ -794,16 +841,16 @@
         font-size:clamp(24px, 6vw, 42px);
       }
 
-      .icon-box{
+      .top-social,
+      .hero-social{
         width:34px;
         height:34px;
-        font-size:16px;
       }
 
-      .social-round{
-        width:34px;
-        height:34px;
-        font-size:22px;
+      .top-social svg,
+      .hero-social svg{
+        width:16px;
+        height:16px;
       }
 
       .role-line{
@@ -889,8 +936,12 @@
     <div class="container hero-content">
       <div class="hero-top hero-animate delay-1">
         <div class="hero-top-icons">
-          <a href="https://youtube.com/" target="_blank" class="icon-box">▶</a>
-          <a href="https://facebook.com/" target="_blank" class="icon-box">f</a>
+          <a href="https://youtube.com/" target="_blank" class="top-social" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.5v-7L16 12l-6.4 3.5Z"/></svg>
+          </a>
+          <a href="https://facebook.com/" target="_blank" class="top-social" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.7V5c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.4V11H7.5v3H10V22h3.5Z"/></svg>
+          </a>
         </div>
       </div>
 
@@ -903,8 +954,12 @@
 
       <div class="hero-bottom hero-animate delay-3">
         <div class="social-row">
-          <a href="https://tiktok.com/" target="_blank" class="social-round">♪</a>
-          <a href="https://instagram.com/" target="_blank" class="social-round">◎</a>
+          <a href="https://tiktok.com/" target="_blank" class="hero-social" aria-label="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M19.6 8.5a6.7 6.7 0 0 1-4-1.3v6.1a5.5 5.5 0 1 1-5.5-5.5c.4 0 .8 0 1.2.1v2.8a2.8 2.8 0 1 0 1.5 2.5V2h2.8a4 4 0 0 0 4 4v2.5Z"/></svg>
+          </a>
+          <a href="https://instagram.com/" target="_blank" class="hero-social" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm10.3 1.6a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6Z"/></svg>
+          </a>
         </div>
 
         <div class="role-line">
@@ -958,7 +1013,7 @@
 
   <section class="reel-section" id="reel">
     <div class="container">
-      <h2 class="section-title white reveal">Demo Reel</h2>
+      <h2 class="section-title dark reveal">Demo Reel</h2>
 
       <div class="reel-box reveal">
         <a class="reel-thumb" href="https://youtube.com/" target="_blank">
@@ -1069,11 +1124,29 @@
         <h3>Contact</h3>
         <p>TO DO — add a short contact text here.</p>
 
-        <div class="contact-links">
-          <a class="contact-link" href="mailto:TODO@email.com">TO DO@email.com</a>
-          <a class="contact-link" href="https://instagram.com/" target="_blank">TO DO — Instagram</a>
-          <a class="contact-link" href="https://tiktok.com/" target="_blank">TO DO — TikTok</a>
+        <div class="contact-socials">
+          <a href="mailto:TODO@email.com" class="contact-circle" aria-label="Email">
+            <svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm0 2v.5l9 6 9-6V7l-9 6-9-6Z"/></svg>
+          </a>
+
+          <a href="https://instagram.com/" target="_blank" class="contact-circle" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm10.3 1.6a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6Z"/></svg>
+          </a>
+
+          <a href="https://facebook.com/" target="_blank" class="contact-circle" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.7V5c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.4V11H7.5v3H10V22h3.5Z"/></svg>
+          </a>
+
+          <a href="https://tiktok.com/" target="_blank" class="contact-circle" aria-label="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M19.6 8.5a6.7 6.7 0 0 1-4-1.3v6.1a5.5 5.5 0 1 1-5.5-5.5c.4 0 .8 0 1.2.1v2.8a2.8 2.8 0 1 0 1.5 2.5V2h2.8a4 4 0 0 0 4 4v2.5Z"/></svg>
+          </a>
+
+          <a href="https://youtube.com/" target="_blank" class="contact-circle" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.5v-7L16 12l-6.4 3.5Z"/></svg>
+          </a>
         </div>
+
+        <div class="contact-email">TO DO@email.com</div>
       </div>
     </div>
   </section>
@@ -1114,6 +1187,12 @@
 
     menuOverlay.addEventListener("click", closeMenu);
     menuLinks.forEach(link => link.addEventListener("click", closeMenu));
+
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape"){
+        closeMenu();
+      }
+    });
 
     const reveals = document.querySelectorAll(".reveal");
     const observer = new IntersectionObserver((entries) => {
