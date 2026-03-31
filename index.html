@@ -220,112 +220,137 @@
       position:absolute;
       inset:0;
       background:
-        linear-gradient(180deg, rgba(5,12,22,0.28) 0%, rgba(5,12,22,0.14) 25%, rgba(5,12,22,0.18) 48%, rgba(5,12,22,0.72) 100%),
-        radial-gradient(circle at center, rgba(82,142,255,0.18), transparent 44%);
+        linear-gradient(180deg, rgba(5,12,22,0.08) 0%, rgba(5,12,22,0.08) 28%, rgba(5,12,22,0.14) 55%, rgba(5,12,22,0.45) 100%),
+        radial-gradient(circle at center, rgba(82,142,255,0.08), transparent 44%);
       pointer-events:none;
     }
 
     .hero-content{
-  position:relative;
-  min-height:calc(70vh - 52px);
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  padding:0;
-}
+      position:relative;
+      min-height:calc(70vh - 52px);
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      padding:0;
+    }
 
-.hero-middle{
-  flex:1;
-  display:block;
-}
+    .hero-top{
+      display:flex;
+      justify-content:flex-end;
+      padding:18px 18px 0 0;
+    }
 
-.hero-copy{
-  position:relative;
-  width:100%;
-  min-height:calc(70vh - 52px);
-  max-width:none;
-  margin:0;
-}
+    .hero-top-icons,
+    .social-row{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
 
-.name-row{
-  position:relative;
-  width:100%;
-  height:100%;
-}
+    .top-social,
+    .hero-social{
+      width:34px;
+      height:34px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:rgba(10,18,34,0.18);
+      color:#ffffff;
+      border:1px solid rgba(255,255,255,0.22);
+      backdrop-filter:blur(6px);
+      box-shadow:0 10px 22px rgba(0,0,0,0.12);
+      transition:var(--transition);
+    }
 
-.name-word{
-  position:absolute;
-  font-family:"Montserrat", sans-serif;
-  font-size:clamp(34px, 7vw, 82px);
-  font-weight:900;
-  line-height:0.9;
-  letter-spacing:0.04em;
-  text-transform:uppercase;
-  color:#bcd6ff;
-  text-shadow:0 4px 18px rgba(0,0,0,0.28);
-  padding:0;
-  border:none;
-  background:none;
-  backdrop-filter:none;
-  border-radius:0;
-}
+    .top-social:hover,
+    .hero-social:hover{
+      transform:translateY(-2px);
+      background:rgba(10,18,34,0.28);
+    }
 
-.name-word-left{
-  left:18px;
-  top:24%;
-  transform:none;
-}
+    .top-social svg,
+    .hero-social svg{
+      width:16px;
+      height:16px;
+      fill:currentColor;
+      display:block;
+    }
 
-.name-word-right{
-  right:18px;
-  top:34%;
-  margin-left:0;
-  text-align:right;
-}
+    .hero-middle{
+      flex:1;
+      display:block;
+    }
 
-.role-line{
-  position:absolute;
-  left:18px;
-  right:18px;
-  bottom:108px;
-  font-family:"Montserrat", sans-serif;
-  font-weight:800;
-  font-size:clamp(12px, 1.7vw, 18px);
-  color:#eef5ff;
-  text-transform:uppercase;
-  letter-spacing:0.05em;
-  padding:0;
-  background:none;
-  border:none;
-  border-radius:0;
-  backdrop-filter:none;
-  text-shadow:0 2px 12px rgba(0,0,0,0.45);
-}
+    .hero-copy{
+      position:relative;
+      width:100%;
+      min-height:calc(70vh - 52px);
+      max-width:none;
+      margin:0;
+    }
 
-.hero-bottom{
-  position:absolute;
-  left:18px;
-  bottom:26px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  align-items:flex-start;
-  padding:0;
-}
+    .name-row{
+      position:relative;
+      width:100%;
+      height:100%;
+    }
+
+    .name-word{
+      position:absolute;
+      font-family:"Montserrat", sans-serif;
+      font-size:clamp(34px, 7vw, 82px);
+      font-weight:900;
+      line-height:0.9;
+      letter-spacing:0.04em;
+      text-transform:uppercase;
+      color:#bcd6ff;
+      text-shadow:0 4px 18px rgba(0,0,0,0.28);
+      padding:0;
+      border:none;
+      background:none;
+      border-radius:0;
+      backdrop-filter:none;
+    }
+
+    .name-word-left{
+      left:18px;
+      top:26%;
+    }
+
+    .name-word-right{
+      right:18px;
+      top:37%;
+      text-align:right;
+    }
+
     .role-line{
+      position:absolute;
+      left:18px;
+      right:18px;
+      bottom:108px;
       font-family:"Montserrat", sans-serif;
       font-weight:800;
-      font-size:clamp(11px, 1.6vw, 17px);
-      color:#ffffff;
+      font-size:clamp(12px, 1.7vw, 18px);
+      color:#eef5ff;
       text-transform:uppercase;
-      letter-spacing:0.04em;
-      padding:9px 14px;
-      border-radius:999px;
-      background:rgba(8,18,34,0.32);
-      border:1px solid rgba(255,255,255,0.14);
-      backdrop-filter:blur(5px);
-      text-shadow:0 2px 12px rgba(0,0,0,0.4);
-      margin-top:10px;
+      letter-spacing:0.05em;
+      padding:0;
+      background:none;
+      border:none;
+      border-radius:0;
+      text-shadow:0 2px 12px rgba(0,0,0,0.45);
+    }
+
+    .hero-bottom{
+      position:absolute;
+      left:18px;
+      bottom:26px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:flex-start;
+      padding:0;
     }
 
     /* common */
@@ -456,6 +481,7 @@
       aspect-ratio:1 / 1;
       overflow:hidden;
       background:#ddd;
+      cursor:pointer;
     }
 
     .photo-card img{
@@ -463,6 +489,7 @@
       height:100%;
       object-fit:cover;
       transition:transform 0.35s ease;
+      cursor:pointer;
     }
 
     .photo-card:hover img{
@@ -557,25 +584,29 @@
       text-transform:uppercase;
       line-height:1.05;
       letter-spacing:0.01em;
-      text-shadow:0 2px 12px rgba(0,0,0,0.2);
+      text-shadow:0 2px 12px rgba(0,0,0,0.24);
     }
 
-    .teach-text.gold{ color:rgba(182,151,110,0.88); }
+    .teach-text.gold{ color:#f2e0bb; }
     .teach-text.blue{ color:#adcaf0; }
-    .teach-text.gray{ color:#c7c7c7; }
+    .teach-text.gray{ color:#d7d7d7; }
     .teach-text.white{ color:#ffffff; }
 
-    .teach-large{ font-size:clamp(24px, 5vw, 60px); }
+    .teach-large{ font-size:clamp(22px, 4.4vw, 48px); }
     .teach-mid{ font-size:clamp(20px, 4vw, 38px); }
     .teach-small{ font-size:clamp(16px, 3vw, 28px); }
 
     .teach-1{
-      left:7%;
-      top:38%;
-      transform:translateY(-50%);
-      padding:8px 14px;
+      left:5%;
+      bottom:16px;
+      top:auto;
+      transform:none;
+      padding:10px 16px;
       border-radius:14px;
-      background:rgba(0,0,0,0.24);
+      background:rgba(11,18,30,0.34);
+      border:1px solid rgba(255,255,255,0.14);
+      backdrop-filter:blur(4px);
+      box-shadow:0 10px 26px rgba(0,0,0,0.18);
     }
 
     .teach-2{
@@ -769,6 +800,50 @@
       color:var(--muted);
     }
 
+    /* lightbox */
+    .lightbox{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.92);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      opacity:0;
+      pointer-events:none;
+      transition:0.25s ease;
+      z-index:1000;
+    }
+
+    .lightbox.active{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    .lightbox img{
+      max-width:100%;
+      max-height:100%;
+      width:auto;
+      height:auto;
+      border-radius:14px;
+      box-shadow:0 20px 50px rgba(0,0,0,0.35);
+    }
+
+    .lightbox-close{
+      position:absolute;
+      top:18px;
+      right:18px;
+      width:42px;
+      height:42px;
+      border:none;
+      border-radius:50%;
+      background:rgba(255,255,255,0.14);
+      color:#fff;
+      font-size:28px;
+      line-height:1;
+      cursor:pointer;
+    }
+
     /* footer */
     footer{
       padding:18px 0 28px;
@@ -842,7 +917,7 @@
 
       .hero-content{
         min-height:calc(66vh - 46px);
-        padding:10px 0 14px;
+        padding:0;
       }
 
       .top-social,
@@ -857,45 +932,44 @@
         height:14px;
       }
 
+      .hero-top{
+        padding:14px 16px 0 0;
+      }
+
       .hero-middle{
-        align-items:center;
-        padding-bottom:0;
+        display:block;
       }
 
       .hero-copy{
-        gap:10px;
-        max-width:86vw;
-        margin-left:12px;
-        margin-top:8px;
-      }
-
-      .name-row{
-        gap:8px 10px;
+        min-height:calc(66vh - 46px);
+        max-width:none;
+        margin:0;
       }
 
       .name-word{
-        font-size:clamp(24px, 8vw, 38px);
-        padding:8px 12px;
+        font-size:clamp(28px, 8.6vw, 48px);
       }
 
       .name-word-left{
-        transform:translateY(-10px);
+        left:16px;
+        top:25%;
       }
 
       .name-word-right{
-        margin-left:8px;
-      }
-
-      .hero-bottom{
-        padding-left:12px;
-        padding-bottom:8px;
+        right:16px;
+        top:35%;
       }
 
       .role-line{
-        font-size:10px;
-        letter-spacing:0.05em;
-        padding:8px 10px;
-        margin-top:6px;
+        left:16px;
+        right:16px;
+        bottom:102px;
+        font-size:11px;
+      }
+
+      .hero-bottom{
+        left:16px;
+        bottom:18px;
       }
 
       .section{
@@ -934,7 +1008,8 @@
       }
 
       .photos-grid{
-        grid-template-columns:repeat(3, 1fr);
+        grid-template-columns:repeat(4, 1fr);
+        gap:3px;
       }
 
       .play-button{
@@ -953,56 +1028,32 @@
         min-height:180px;
       }
 
+      .teach-large{
+        font-size:clamp(18px, 5vw, 28px);
+      }
+
+      .teach-1{
+        left:12px;
+        bottom:12px;
+        padding:8px 12px;
+      }
+
       .contact-circle{
         width:38px;
         height:38px;
       }
+
+      .lightbox{
+        padding:14px;
+      }
+
+      .lightbox-close{
+        top:14px;
+        right:14px;
+      }
     }
-    .lightbox{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.92);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  opacity:0;
-  pointer-events:none;
-  transition:0.25s ease;
-  z-index:1000;
-}
-
-.lightbox.active{
-  opacity:1;
-  pointer-events:auto;
-}
-
-.lightbox img{
-  max-width:100%;
-  max-height:100%;
-  width:auto;
-  height:auto;
-  border-radius:14px;
-  box-shadow:0 20px 50px rgba(0,0,0,0.35);
-}
-
-.lightbox-close{
-  position:absolute;
-  top:18px;
-  right:18px;
-  width:42px;
-  height:42px;
-  border:none;
-  border-radius:50%;
-  background:rgba(255,255,255,0.14);
-  color:#fff;
-  font-size:28px;
-  line-height:1;
-  cursor:pointer;
-}
   </style>
 </head>
-  
 <body>
 
   <div class="topbar">
@@ -1026,6 +1077,8 @@
         <li><a href="#biography" class="menu-link">Biography</a></li>
         <li><a href="#photos" class="menu-link">Photos</a></li>
         <li><a href="#reels" class="menu-link">Reels</a></li>
+        <li><a href="#teaching" class="menu-link">Teaching</a></li>
+        <li><a href="#resume" class="menu-link">Resume</a></li>
         <li><a href="#booking" class="menu-link">Booking</a></li>
         <li><a href="#contact" class="menu-link">Contact</a></li>
       </ul>
@@ -1040,7 +1093,7 @@
     <div class="container hero-content">
       <div class="hero-top hero-animate delay-1">
         <div class="hero-top-icons">
-          <a href="https://youtube.com/" target="_blank" class="top-social" aria-label="YouTube">
+          <a href="https://youtube.com/@lolagrace06?si=lyduQHERA7NhZfeg" target="_blank" class="top-social" aria-label="YouTube">
             <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.5v-7L16 12l-6.4 3.5Z"/></svg>
           </a>
           <a href="https://www.facebook.com/share/18Ts4arHZg/?mibextid=wwXIfr" target="_blank" class="top-social" aria-label="Facebook">
@@ -1055,7 +1108,6 @@
             <div class="name-word name-word-left">Lola</div>
             <div class="name-word name-word-right">Grace</div>
           </div>
-
           <div class="role-line">Dancer | Contortionist | Aerialist</div>
         </div>
       </div>
@@ -1099,22 +1151,18 @@
     <div class="container">
       <h2 class="section-title brown reveal">Photos</h2>
       <div class="photos-grid reveal">
-        <div class="photo-card"><img src="photo1.jpg" alt=""></div>
-        <div class="photo-card"><img src="photo2.jpg" alt=""></div>
-        <div class="photo-card"><img src="photo3.jpg" alt=""></div>
-        <div class="photo-card"><img src="photo4.jpg" alt=""></div>
-        <div class="photo-card"><img src="photo5.jpg" alt=""></div>
-        <div class="photo-card"><img src="photo6.jpg" alt=""></div>
-        <div class="photo-card"><img src="photo7.jpg" alt=""></div>
-        <div class="photo-card"><img src="photo8.jpg" alt=""></div>
-        <div class="photo-card"><img src="photo9.jpg" alt=""></div>
-        <div class="photo-card"><img src="photo10.jpg" alt=""></div>
-        <div class="photo-card"><img src="photo11.jpg" alt=""></div>
-        <div class="photo-card"><img src="photo12.jpg" alt=""></div>
-        <div class="photo-card"><img scr="photo13.jpg" alt=""></div>
-        <div class="photo-card"><img scr="photo14.jpg" alt=""></div>
-        <div class="photo-card"><img scr="photo15.jpg" alt=""></div>
-        <div class="photo-card"><img scr="photo16.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo1.jpg" alt="Lola Grace photo 1"></div>
+        <div class="photo-card"><img src="photo2.jpg" alt="Lola Grace photo 2"></div>
+        <div class="photo-card"><img src="photo3.jpg" alt="Lola Grace photo 3"></div>
+        <div class="photo-card"><img src="photo4.jpg" alt="Lola Grace photo 4"></div>
+        <div class="photo-card"><img src="photo5.jpg" alt="Lola Grace photo 5"></div>
+        <div class="photo-card"><img src="photo6.jpg" alt="Lola Grace photo 6"></div>
+        <div class="photo-card"><img src="photo7.jpg" alt="Lola Grace photo 7"></div>
+        <div class="photo-card"><img src="photo8.jpg" alt="Lola Grace photo 8"></div>
+        <div class="photo-card"><img src="photo9.jpg" alt="Lola Grace photo 9"></div>
+        <div class="photo-card"><img src="photo10.jpg" alt="Lola Grace photo 10"></div>
+        <div class="photo-card"><img src="photo11.jpg" alt="Lola Grace photo 11"></div>
+        <div class="photo-card"><img src="photo12.jpg" alt="Lola Grace photo 12"></div>
       </div>
     </div>
   </section>
@@ -1210,7 +1258,7 @@
 
         <div class="booking-card reveal">
           <h3>Booking Request</h3>
-          <form class="form" action="https://formspree.io/f/xzdkgjbz" method="POST">
+          <form class="form" action="https://formspree.io/f/REPLACE_WITH_YOUR_ID" method="POST">
             <input class="field" type="text" name="name" placeholder="Your name" required>
             <input class="field" type="email" name="email" placeholder="Your email" required>
             <input class="field" type="text" name="event" placeholder="Event / venue">
@@ -1263,6 +1311,11 @@
     </div>
   </footer>
 
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close photo">&times;</button>
+    <img id="lightboxImage" src="" alt="">
+  </div>
+
   <script>
     const menuButton = document.getElementById("menuButton");
     const sideMenu = document.getElementById("sideMenu");
@@ -1294,7 +1347,7 @@
     menuLinks.forEach(link => link.addEventListener("click", closeMenu));
 
     document.addEventListener("keydown", (e) => {
-      if(e.key === "Escape"){
+      if(e.key === "Escape" && !document.getElementById("lightbox").classList.contains("active")){
         closeMenu();
       }
     });
@@ -1310,45 +1363,40 @@
     }, { threshold: 0.12 });
 
     reveals.forEach(item => observer.observe(item));
+
     const photoImages = document.querySelectorAll(".photo-card img");
-const lightbox = document.getElementById("lightbox");
-const lightboxImage = document.getElementById("lightboxImage");
-const lightboxClose = document.getElementById("lightboxClose");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const lightboxClose = document.getElementById("lightboxClose");
 
-photoImages.forEach(img => {
-  img.style.cursor = "pointer";
+    photoImages.forEach(img => {
+      img.addEventListener("click", () => {
+        lightboxImage.src = img.src;
+        lightboxImage.alt = img.alt || "";
+        lightbox.classList.add("active");
+        document.body.classList.add("menu-open");
+      });
+    });
 
-  img.addEventListener("click", () => {
-    lightboxImage.src = img.src;
-    lightboxImage.alt = img.alt || "";
-    lightbox.classList.add("active");
-    document.body.classList.add("menu-open");
-  });
-});
+    function closeLightbox(){
+      lightbox.classList.remove("active");
+      lightboxImage.src = "";
+      document.body.classList.remove("menu-open");
+    }
 
-function closeLightbox(){
-  lightbox.classList.remove("active");
-  lightboxImage.src = "";
-  document.body.classList.remove("menu-open");
-}
+    lightboxClose.addEventListener("click", closeLightbox);
 
-lightboxClose.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (e) => {
+      if(e.target === lightbox){
+        closeLightbox();
+      }
+    });
 
-lightbox.addEventListener("click", (e) => {
-  if(e.target === lightbox){
-    closeLightbox();
-  }
-});
-
-document.addEventListener("keydown", (e) => {
-  if(e.key === "Escape"){
-    closeLightbox();
-  }
-});
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape" && lightbox.classList.contains("active")){
+        closeLightbox();
+      }
+    });
   </script>
-  <div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lightboxClose" aria-label="Close photo">&times;</button>
-  <img id="lightboxImage" src="" alt="">
-</div>
 </body>
 </html>
