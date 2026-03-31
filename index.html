@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lola Grace Portfolio</title>
+  <meta name="description" content="TO DO portfolio website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f2f2f2;
+      --bg-soft:#f7f7f7;
+      --panel:#ffffff;
+      --line:#dddddd;
+      --menuText:#32465f;
+      --heroText:#a9c7ed;
+      --bodyText:#1f1f1f;
+      --muted:#595959;
+      --shadow:0 12px 28px rgba(0,0,0,0.06);
+      --transition:0.35s ease;
+      --max:1320px;
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:"Inter", sans-serif;
+      background:var(--bg);
+      color:var(--bodyText);
+      overflow-x:hidden;
+    }
+
+    body.menu-open{
+      overflow:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    img, video{
+      display:block;
+      width:100%;
+    }
+
+    button, input, textarea{
+      font:inherit;
+    }
+
+    .container{
+      width:min(var(--max), calc(100% - 20px));
+      margin:0 auto;
+    }
+
+    /* top bar */
+    .topbar{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      z-index:100;
+      background:rgba(242,242,242,0.97);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      min-height:64px;
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+    }
+
+    .menu-button{
+      width:64px;
+      height:64px;
+      border:none;
+      border-left:1px solid var(--line);
+      background:transparent;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .burger{
+      width:28px;
+      height:20px;
+      position:relative;
+    }
+
+    .burger span{
+      position:absolute;
+      left:0;
+      width:100%;
+      height:3px;
+      background:var(--menuText);
+      border-radius:999px;
+      transition:var(--transition);
+    }
+
+    .burger span:nth-child(1){ top:0; }
+    .burger span:nth-child(2){ top:8px; }
+    .burger span:nth-child(3){ top:16px; }
+
+    .menu-open .burger span:nth-child(1){
+      transform:translateY(8px) rotate(45deg);
+    }
+    .menu-open .burger span:nth-child(2){
+      opacity:0;
+    }
+    .menu-open .burger span:nth-child(3){
+      transform:translateY(-8px) rotate(-45deg);
+    }
+
+    /* side menu */
+    .menu-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.18);
+      opacity:0;
+      pointer-events:none;
+      transition:var(--transition);
+      z-index:110;
+    }
+
+    .menu-overlay.active{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    .side-menu{
+      position:fixed;
+      top:0;
+      right:0;
+      width:min(300px, 72vw);
+      height:100vh;
+      background:#f3f3f3;
+      z-index:120;
+      transform:translateX(100%);
+      transition:transform 0.42s ease;
+      border-left:1px solid var(--line);
+      overflow-y:auto;
+    }
+
+    .side-menu.active{
+      transform:translateX(0);
+    }
+
+    .menu-inner{
+      padding-top:14px;
+      min-height:100%;
+    }
+
+    .menu-list{
+      list-style:none;
+    }
+
+    .menu-list a{
+      display:block;
+      padding:14px 18px;
+      font-family:"Montserrat", sans-serif;
+      font-weight:900;
+      font-size:clamp(18px, 3vw, 28px);
+      letter-spacing:0.01em;
+      color:var(--menuText);
+      text-transform:uppercase;
+      transition:var(--transition);
+    }
+
+    .menu-list a:hover{
+      transform:translateX(4px);
+    }
+
+    .menu-list .active-link{
+      display:inline-block;
+      border:3px solid #b9d8ff;
+      padding:2px 8px;
+      line-height:1;
+      border-radius:8px;
+    }
+
+    /* hero */
+    .hero{
+      position:relative;
+      min-height:72vh;
+      padding-top:64px;
+      overflow:hidden;
+      background:#b2bec9;
+    }
+
+    .hero-image{
+      position:absolute;
+      inset:64px 0 0 0;
+      background:url("hero.jpg") center top / cover no-repeat;
+    }
+
+    .hero-content{
+      position:relative;
+      min-height:calc(72vh - 64px);
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      padding:12px 0 14px;
+    }
+
+    .hero-top{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .hero-top-icons{
+      display:flex;
+      gap:8px;
+    }
+
+    .top-social{
+      width:36px;
+      height:36px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:rgba(28,38,52,0.9);
+      color:#fff;
+      box-shadow:var(--shadow);
+      transition:var(--transition);
+    }
+
+    .top-social:hover{
+      transform:translateY(-2px);
+    }
+
+    .top-social svg{
+      width:18px;
+      height:18px;
+      fill:currentColor;
+      display:block;
+    }
+
+    .hero-middle{
+      flex:1;
+      display:flex;
+      align-items:center;
+    }
+
+    .name-row{
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      margin-top:-20px;
+    }
+
+    .name-word{
+      font-family:"Montserrat", sans-serif;
+      font-size:clamp(28px, 6vw, 72px);
+      font-weight:900;
+      line-height:0.95;
+      letter-spacing:0.01em;
+      text-transform:uppercase;
+      color:var(--heroText);
+    }
+
+    .hero-bottom{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:flex-start;
+    }
+
+    .social-row{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .hero-social{
+      width:36px;
+      height:36px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:rgba(28,38,52,0.08);
+      color:#1f2730;
+      border:1px solid rgba(28,38,52,0.12);
+      transition:var(--transition);
+    }
+
+    .hero-social:hover{
+      transform:translateY(-2px);
+      background:rgba(28,38,52,0.12);
+    }
+
+    .hero-social svg{
+      width:18px;
+      height:18px;
+      fill:currentColor;
+      display:block;
+    }
+
+    .role-line{
+      font-family:"Montserrat", sans-serif;
+      font-weight:900;
+      font-size:clamp(12px, 1.6vw, 18px);
+      color:#0d1420;
+      text-transform:uppercase;
+      letter-spacing:0.01em;
+    }
+
+    /* common */
+    .section{
+      padding:26px 0;
+      background:var(--bg);
+    }
+
+    .section-title{
+      font-family:"Montserrat", sans-serif;
+      font-size:clamp(18px, 5vw, 28px);
+      font-weight:900;
+      text-transform:uppercase;
+      line-height:0.95;
+      letter-spacing:0.01em;
+      margin-bottom:12px;
+      color:var(--menuText);
+    }
+
+    .section-title.brown{
+      color:#9f7a4c;
+    }
+
+    .section-title.dark{
+      color:var(--menuText);
+    }
+
+    .small-text{
+      font-size:13px;
+      line-height:1.5;
+      color:#2a2a2a;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(20px);
+      transition:0.7s ease;
+    }
+
+    .reveal.visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .hero-animate{
+      opacity:0;
+      animation:heroIn 1s ease forwards;
+    }
+
+    .hero-animate.delay-1{ animation-delay:0.1s; }
+    .hero-animate.delay-2{ animation-delay:0.28s; }
+    .hero-animate.delay-3{ animation-delay:0.45s; }
+
+    @keyframes heroIn{
+      0%{
+        opacity:0;
+        transform:translateX(45px);
+      }
+      60%{
+        opacity:1;
+        transform:translateX(-6px);
+      }
+      100%{
+        opacity:1;
+        transform:translateX(0);
+      }
+    }
+
+    /* biography */
+    .biography{
+      background:var(--bg);
+    }
+
+    .bio-grid{
+      display:grid;
+      grid-template-columns:1.15fr 0.85fr;
+      gap:0;
+      align-items:start;
+    }
+
+    .bio-left{
+      padding:16px 10px 20px 10px;
+    }
+
+    .bio-text{
+      max-width:720px;
+      font-size:12px;
+      line-height:1.42;
+      color:#2c2c2c;
+    }
+
+    .bio-text p{
+      margin-bottom:14px;
+    }
+
+    .bio-right{
+      border-left:1px solid var(--line);
+      background:#ece7df;
+    }
+
+    .stack-image{
+      width:100%;
+      border-bottom:1px solid var(--line);
+      overflow:hidden;
+    }
+
+    .stack-image img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+
+    /* photos */
+    .photos-section{
+      background:var(--bg);
+      padding:26px 0;
+    }
+
+    .photos-grid{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:4px;
+    }
+
+    .photo-card{
+      aspect-ratio:1 / 1;
+      overflow:hidden;
+      background:#ddd;
+    }
+
+    .photo-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform 0.35s ease;
+    }
+
+    .photo-card:hover img{
+      transform:scale(1.04);
+    }
+
+    /* reel */
+    .reel-section{
+      background:var(--bg);
+      padding:26px 0;
+    }
+
+    .reel-box{
+      max-width:760px;
+      background:#1b1b1b;
+      border:1px solid rgba(0,0,0,0.18);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+
+    .reel-thumb{
+      position:relative;
+      display:block;
+    }
+
+    .reel-thumb img{
+      aspect-ratio:16 / 9;
+      object-fit:cover;
+    }
+
+    .play-button{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      width:86px;
+      height:60px;
+      background:#ff1b1b;
+      border-radius:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:var(--shadow);
+    }
+
+    .play-button::before{
+      content:"";
+      border-left:22px solid #fff;
+      border-top:14px solid transparent;
+      border-bottom:14px solid transparent;
+      margin-left:4px;
+    }
+
+    /* highlights */
+    .highlights-section{
+      background:var(--bg);
+      padding:26px 0;
+    }
+
+    .highlights-grid-top,
+    .highlights-grid-bottom{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:10px;
+    }
+
+    .highlights-grid-top{
+      margin-bottom:10px;
+    }
+
+    .highlight-card{
+      background:#ddd;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+
+    .highlight-card.tall img{
+      aspect-ratio:9 / 16;
+      object-fit:cover;
+    }
+
+    .highlight-card.wide img{
+      aspect-ratio:16 / 10;
+      object-fit:cover;
+    }
+
+    /* teaching */
+    .teaching-section{
+      background:var(--bg);
+      padding:0;
+    }
+
+    .teaching-stack{
+      display:grid;
+      grid-template-columns:1fr;
+    }
+
+    .teach-panel{
+      position:relative;
+      overflow:hidden;
+      min-height:200px;
+      border-top:1px solid rgba(0,0,0,0.08);
+    }
+
+    .teach-panel img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .teach-text{
+      position:absolute;
+      font-family:"Montserrat", sans-serif;
+      font-weight:800;
+      text-transform:uppercase;
+      line-height:1.05;
+      letter-spacing:0.01em;
+    }
+
+    .teach-text.gold{ color:rgba(182,151,110,0.88); }
+    .teach-text.blue{ color:#adcaf0; }
+    .teach-text.gray{ color:#c7c7c7; }
+    .teach-text.white{ color:#ffffff; }
+
+    .teach-large{ font-size:clamp(24px, 5vw, 60px); }
+    .teach-mid{ font-size:clamp(20px, 4vw, 38px); }
+    .teach-small{ font-size:clamp(16px, 3vw, 28px); }
+
+    .teach-1{
+      left:10%;
+      top:46%;
+      transform:translateY(-50%);
+    }
+
+    .teach-2{
+      right:6%;
+      top:12%;
+      max-width:44%;
+      text-align:left;
+    }
+
+    .teach-3{
+      left:6%;
+      top:12%;
+      text-align:left;
+    }
+
+    .teach-4{
+      left:50%;
+      bottom:8%;
+      transform:translateX(-50%);
+      text-align:center;
+      width:92%;
+    }
+
+    .teach-5{
+      right:6%;
+      top:12%;
+      max-width:44%;
+      text-align:left;
+    }
+
+    /* booking */
+    .booking-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      align-items:start;
+    }
+
+    .booking-card{
+      padding:18px;
+      border-radius:18px;
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+
+    .booking-card h3{
+      font-family:"Montserrat", sans-serif;
+      font-size:20px;
+      font-weight:800;
+      margin-bottom:10px;
+      color:var(--menuText);
+      text-transform:uppercase;
+    }
+
+    .booking-card p{
+      color:var(--muted);
+      line-height:1.6;
+      font-size:13px;
+      margin-bottom:12px;
+    }
+
+    .booking-list{
+      display:grid;
+      gap:8px;
+    }
+
+    .booking-item{
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#fafafa;
+      font-size:12px;
+      color:#4a3a2d;
+    }
+
+    .form{
+      display:grid;
+      gap:8px;
+      margin-top:6px;
+    }
+
+    .field{
+      width:100%;
+      padding:11px 12px;
+      border-radius:12px;
+      border:1px solid rgba(75,57,40,0.14);
+      background:#fcfcfc;
+      color:var(--bodyText);
+      font:inherit;
+      font-size:13px;
+      outline:none;
+    }
+
+    textarea.field{
+      min-height:96px;
+      resize:vertical;
+    }
+
+    .submit-btn{
+      width:fit-content;
+      min-height:40px;
+      padding:0 16px;
+      border:none;
+      border-radius:999px;
+      background:#2e251d;
+      color:#fffaf5;
+      font-family:"Montserrat", sans-serif;
+      font-size:10px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    /* contact */
+    .contact-box{
+      padding:18px;
+      border-radius:18px;
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+
+    .contact-box h3{
+      font-family:"Montserrat", sans-serif;
+      font-size:22px;
+      font-weight:800;
+      margin-bottom:10px;
+      color:var(--menuText);
+      text-transform:uppercase;
+    }
+
+    .contact-box p{
+      color:var(--muted);
+      line-height:1.6;
+      font-size:13px;
+      margin-bottom:14px;
+    }
+
+    .contact-socials{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:6px;
+    }
+
+    .contact-circle{
+      width:42px;
+      height:42px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:#ffffff;
+      border:1px solid var(--line);
+      color:var(--menuText);
+      box-shadow:var(--shadow);
+      transition:var(--transition);
+    }
+
+    .contact-circle:hover{
+      transform:translateY(-2px);
+      background:#f8fbff;
+    }
+
+    .contact-circle svg{
+      width:18px;
+      height:18px;
+      fill:currentColor;
+      display:block;
+    }
+
+    .contact-email{
+      margin-top:12px;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    /* footer */
+    footer{
+      padding:18px 0 28px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:11px;
+      background:var(--bg);
+    }
+
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    /* responsive */
+    @media (max-width: 980px){
+      .bio-grid,
+      .booking-grid{
+        grid-template-columns:1fr;
+      }
+
+      .bio-right{
+        border-left:none;
+        border-top:1px solid var(--line);
+      }
+
+      .highlights-grid-top,
+      .highlights-grid-bottom{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media (max-width: 680px){
+      .topbar-inner{
+        min-height:58px;
+      }
+
+      .menu-button{
+        width:58px;
+        height:58px;
+      }
+
+      .side-menu{
+        width:min(300px, 82vw);
+      }
+
+      .menu-list a{
+        padding:14px 16px;
+        font-size:22px;
+      }
+
+      .hero{
+        min-height:72vh;
+        padding-top:58px;
+      }
+
+      .hero-image{
+        inset:58px 0 0 0;
+      }
+
+      .hero-content{
+        min-height:calc(72vh - 58px);
+        padding:10px 0 12px;
+      }
+
+      .name-row{
+        margin-top:0;
+      }
+
+      .name-word{
+        font-size:clamp(24px, 6vw, 42px);
+      }
+
+      .top-social,
+      .hero-social{
+        width:34px;
+        height:34px;
+      }
+
+      .top-social svg,
+      .hero-social svg{
+        width:16px;
+        height:16px;
+      }
+
+      .role-line{
+        font-size:12px;
+      }
+
+      .bio-left{
+        padding:16px 10px 20px 10px;
+      }
+
+      .bio-text{
+        font-size:12px;
+        line-height:1.42;
+      }
+
+      .bio-text p{
+        margin-bottom:14px;
+      }
+
+      .section{
+        padding:26px 0;
+      }
+
+      .section-title{
+        font-size:clamp(18px, 5vw, 28px);
+        margin-bottom:12px;
+      }
+
+      .photos-grid{
+        grid-template-columns:repeat(4, 1fr);
+        gap:4px;
+      }
+
+      .photo-card{
+        aspect-ratio:1 / 1;
+      }
+
+      .highlights-grid-top,
+      .highlights-grid-bottom{
+        grid-template-columns:1fr;
+      }
+
+      .teach-panel{
+        min-height:200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <button class="menu-button" id="menuButton" aria-label="Open menu">
+        <div class="burger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+  <aside class="side-menu" id="sideMenu">
+    <div class="menu-inner">
+      <ul class="menu-list">
+        <li><a href="#home" class="menu-link"><span class="active-link">Home</span></a></li>
+        <li><a href="#biography" class="menu-link">Biography</a></li>
+        <li><a href="#photos" class="menu-link">Photos</a></li>
+        <li><a href="#reel" class="menu-link">Demo Reel</a></li>
+        <li><a href="#videos" class="menu-link">Videos</a></li>
+        <li><a href="#teaching" class="menu-link">Teaching</a></li>
+        <li><a href="#booking" class="menu-link">Booking</a></li>
+        <li><a href="#contact" class="menu-link">Contact</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <section class="hero" id="home">
+    <div class="hero-image"><img src="hero-background.jpg"></div>
+
+    <div class="container hero-content">
+      <div class="hero-top hero-animate delay-1">
+        <div class="hero-top-icons">
+          <a href="https://youtube.com/" target="_blank" class="top-social" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.5v-7L16 12l-6.4 3.5Z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/share/18Ts4arHZg/?mibextid=wwXIfr" target="_blank" class="top-social" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.7V5c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.4V11H7.5v3H10V22h3.5Z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-middle">
+        <div class="name-row">
+          <div class="name-word hero-animate delay-2">Lola</div>
+          <div class="name-word hero-animate delay-3">Grace</div>
+        </div>
+      </div>
+
+      <div class="hero-bottom hero-animate delay-3">
+        <div class="social-row">
+          <a href="http://www.tiktok.com/@lalarh06" target="_blank" class="hero-social" aria-label="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M19.6 8.5a6.7 6.7 0 0 1-4-1.3v6.1a5.5 5.5 0 1 1-5.5-5.5c.4 0 .8 0 1.2.1v2.8a2.8 2.8 0 1 0 1.5 2.5V2h2.8a4 4 0 0 0 4 4v2.5Z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/lolagrace06?igsh=MXN3aWU3cmkzMzZj" target="_blank" class="hero-social" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm10.3 1.6a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6Z"/></svg>
+          </a>
+        </div>
+
+        <div class="role-line">
+          Dancer | Contortionist | Aerlist
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="biography section" id="biography">
+    <div class="container bio-grid">
+      <div class="bio-left reveal">
+        <h2 class="section-title">Biography</h2>
+
+        <div class="bio-text">
+          <p></p>
+          <p></p>
+        </div>
+      </div>
+
+      <div class="bio-right reveal">
+        <div class="stack-image"><img src="side-bio1.jpg" alt="TO DO image 1"></div>
+        <div class="stack-image"><img src="side-bio2.jpg" alt="TO DO image 2"></div>
+        <div class="stack-image"><img src="side-bio3.jpg" alt="TO DO image 3"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="photos-section" id="photos">
+    <div class="container">
+      <h2 class="section-title brown reveal">Photos</h2>
+
+      <div class="photos-grid reveal">
+        <div class="photo-card"><img src="photo1.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo2.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo3.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo4.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo5.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo6.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo7.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo8.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo9.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo10.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo11.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo12.jpg" alt=""></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reel-section" id="reel">
+    <div class="container">
+      <h2 class="section-title dark reveal">Dance Showreal</h2>
+
+      <div class="reel-box reveal">
+        <a class="reel-thumb" href="https://youtu.be/I-RLLMaF2-o?is=0G9rTTmyM4IkY6FV" target="_blank">
+          <img src="reel-thumb.jpg" alt="Reel thumbnail">
+          <div class="play-button"></div>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+    <section class="reel-section" id="reel">
+    <div class="container">
+      <h2 class="section-title dark reveal">Contortion/Aerial Reel</h2>
+
+      <div class="reel-box reveal">
+        <a class="reel-thumb" href="https://youtu.be/RXMSqpnMHjE?is=Fg862Mvuj9ondLP8" target="_blank">
+          <img src="reel-thumb.jpg" alt="Reel thumbnail">
+          <div class="play-button"></div>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+    <section class="reel-section" id="reel">
+    <div class="container">
+      <h2 class="section-title dark reveal">Aerial/Contortion Reel</h2>
+
+      <div class="reel-box reveal">
+        <a class="reel-thumb" href="https://youtu.be/O4oKH1IjFnU?is=X-9Erc__L9uQ9KQ7" target="_blank">
+          <img src="reel-thumb.jpg" alt="Reel thumbnail">
+          <div class="play-button"></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="highlights-section" id="videos">
+    <div class="container">
+      <h2 class="section-title reveal">Video Highlights</h2>
+
+      <div class="highlights-grid-top reveal">
+        <div class="highlight-card tall"><img src="highlight1.jpg" alt=""></div>
+        <div class="highlight-card tall"><img src="highlight2.jpg" alt=""></div>
+        <div class="highlight-card tall"><img src="highlight3.jpg" alt=""></div>
+      </div>
+
+      <div class="highlights-grid-bottom reveal">
+        <div class="highlight-card wide"><img src="highlight4.jpg" alt=""></div>
+        <div class="highlight-card wide"><img src="highlight5.jpg" alt=""></div>
+        <div class="highlight-card wide"><img src="highlight6.jpg" alt=""></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="teaching-section" id="teaching">
+    <div class="teaching-stack">
+      <div class="teach-panel reveal">
+        <img src="teaching.jpg" alt="">
+        <div class="teach-text gold teach-large teach-1">Teaching</div>
+      </div>
+
+      <div class="teach-panel reveal">
+        <img src="solo.jpg" alt="">
+        <div class="teach-text gray teach-small teach-2">
+          Solo,<br>
+          Duo,<br>
+          Trio,<br>
+          &amp; Group<br>
+          Choreo
+        </div>
+      </div>
+
+      <div class="teach-panel reveal">
+        <img src="contortion.jpg" alt="">
+        <div class="teach-text white teach-small teach-3">
+          Contortion
+        </div>
+        <div class="teach-text blue teach-mid teach-4">
+          Could be something<br>
+          Here
+        </div>
+      </div>
+
+      <div class="teach-panel reveal">
+        <img src="teaching4.jpg" alt="">
+        <div class="teach-text gray teach-small teach-5">
+          Aerial
+        </div>
+        <div class="teach-text gray teach-small teach-5">
+          Diferent styles
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="booking">
+    <div class="container">
+      <h2 class="section-title reveal">Booking</h2>
+
+      <div class="booking-grid">
+        <div class="booking-card reveal">
+          <h3>Available For</h3>
+          <div class="booking-list">
+            <div class="booking-item">Private Events</div>
+            <div class="booking-item">Corporate Events</div>
+            <div class="booking-item">Brand Collaborations</div>
+            <div class="booking-item">Live Performances</div>
+          </div>
+        </div>
+
+        <div class="booking-card reveal">
+          <h3>Booking Request</h3>
+          <form class="form" onsubmit="event.preventDefault(); alert('Replace this with your real booking form later.');">
+            <input class="field" type="text" placeholder="Your name" required>
+            <input class="field" type="email" placeholder="Your email" required>
+            <input class="field" type="text" placeholder="Event / venue">
+            <textarea class="field" placeholder="Tell me about your request"></textarea>
+            <button class="submit-btn" type="submit">Send Request</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="contact-box reveal">
+        <h3>Contact</h3>
+        <p></p>
+
+        <div class="contact-socials">
+          <a href="mailto:lrobertshouse@gmail.com" class="contact-circle" aria-label="Email">
+            <svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm0 2v.5l9 6 9-6V7l-9 6-9-6Z"/></svg>
+          </a>
+
+          <a href="https://www.instagram.com/lolagrace06?igsh=MXN3aWU3cmkzMzZj" target="_blank" class="contact-circle" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm10.3 1.6a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6Z"/></svg>
+          </a>
+
+          <a href="https://www.facebook.com/share/18Ts4arHZg/?mibextid=wwXIfr" target="_blank" class="contact-circle" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.7V5c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.4V11H7.5v3H10V22h3.5Z"/></svg>
+          </a>
+
+          <a href="http://www.tiktok.com/@lalarh06" target="_blank" class="contact-circle" aria-label="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M19.6 8.5a6.7 6.7 0 0 1-4-1.3v6.1a5.5 5.5 0 1 1-5.5-5.5c.4 0 .8 0 1.2.1v2.8a2.8 2.8 0 1 0 1.5 2.5V2h2.8a4 4 0 0 0 4 4v2.5Z"/></svg>
+          </a>
+
+          <a href="https://youtube.com/@lolagrace06?si=lyduQHERA7NhZfeg" target="_blank" class="contact-circle" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.5v-7L16 12l-6.4 3.5Z"/></svg>
+          </a>
+        </div>
+
+        <div class="contact-email">lrobertshouse@gmail.com</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 Lola Grace Roberts-House</div>
+      <div>Dancer | Contortionist | Aerilist</div>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.getElementById("menuButton");
+    const sideMenu = document.getElementById("sideMenu");
+    const menuOverlay = document.getElementById("menuOverlay");
+    const menuLinks = document.querySelectorAll(".menu-link");
+    const body = document.body;
+
+    function openMenu(){
+      sideMenu.classList.add("active");
+      menuOverlay.classList.add("active");
+      body.classList.add("menu-open");
+    }
+
+    function closeMenu(){
+      sideMenu.classList.remove("active");
+      menuOverlay.classList.remove("active");
+      body.classList.remove("menu-open");
+    }
+
+    menuButton.addEventListener("click", () => {
+      if(sideMenu.classList.contains("active")){
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    menuOverlay.addEventListener("click", closeMenu);
+    menuLinks.forEach(link => link.addEventListener("click", closeMenu));
+
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape"){
+        closeMenu();
+      }
+    });
+
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.12 });
+
+    reveals.forEach(item => observer.observe(item));
+  </script>
+
+</body>
+</html>
