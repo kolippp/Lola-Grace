@@ -4,9 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lola Grace Portfolio</title>
-  <meta name="description" content="Lola Grace performer portfolio" />  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <meta name="description" content="Lola Grace performer portfolio" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">  <style>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
     :root{
       --bg:#f2f2f2;
       --panel:#ffffff;
@@ -233,6 +237,7 @@
     .hero-top{
       display:flex;
       justify-content:flex-end;
+      padding-right:8px;
     }
 
     .hero-top-icons,
@@ -275,16 +280,18 @@
     .hero-middle{
       flex:1;
       display:flex;
-      align-items:flex-end;
-      padding-bottom:14px;
+      align-items:center;
+      padding-bottom:0;
     }
 
     .hero-copy{
       display:flex;
       flex-direction:column;
-      gap:12px;
+      gap:14px;
       align-items:flex-start;
       max-width:min(90vw, 760px);
+      margin-left:22px;
+      margin-top:18px;
     }
 
     .name-row{
@@ -292,8 +299,8 @@
       display:flex;
       flex-wrap:wrap;
       justify-content:flex-start;
-      align-items:center;
-      gap:10px 12px;
+      align-items:flex-end;
+      gap:12px 16px;
     }
 
     .name-word{
@@ -312,11 +319,21 @@
       backdrop-filter:blur(5px);
     }
 
+    .name-word-left{
+      transform:translateY(-18px);
+    }
+
+    .name-word-right{
+      margin-left:18px;
+    }
+
     .hero-bottom{
       display:flex;
       flex-direction:column;
-      gap:10px;
+      gap:12px;
       align-items:flex-start;
+      padding-left:22px;
+      padding-bottom:12px;
     }
 
     .role-line{
@@ -332,6 +349,7 @@
       border:1px solid rgba(255,255,255,0.14);
       backdrop-filter:blur(5px);
       text-shadow:0 2px 12px rgba(0,0,0,0.4);
+      margin-top:10px;
     }
 
     /* common */
@@ -401,8 +419,8 @@
 
     .bio-grid{
       display:grid;
-      grid-template-columns:minmax(0, 1.35fr) minmax(220px, 0.65fr);
-      gap:18px;
+      grid-template-columns:minmax(0, 1.2fr) minmax(240px, 0.8fr);
+      gap:22px;
       align-items:start;
     }
 
@@ -412,19 +430,19 @@
     }
 
     .bio-text{
-      max-width:760px;
-      font-size:14px;
-      line-height:1.62;
+      max-width:none;
+      font-size:13px;
+      line-height:1.55;
       color:#2c2c2c;
     }
 
     .bio-text p{
-      margin-bottom:12px;
+      margin-bottom:10px;
     }
 
     .bio-right{
       display:grid;
-      gap:14px;
+      gap:12px;
       align-content:start;
       background:transparent;
       border:none;
@@ -581,7 +599,7 @@
       transform:translateY(-50%);
       padding:8px 14px;
       border-radius:14px;
-      bakcground:rgba(0,0,0,0.24);
+      background:rgba(0,0,0,0.24);
     }
 
     .teach-2{
@@ -590,6 +608,7 @@
       max-width:44%;
       text-align:left;
     }
+
     .teach-3{
       left:6%;
       top:12%;
@@ -601,6 +620,28 @@
       top:12%;
       max-width:44%;
       text-align:left;
+    }
+
+    /* resume */
+    .resume-section{
+      background:var(--bg);
+      padding:24px 0 10px;
+    }
+
+    .resume-card{
+      max-width:820px;
+      margin:0 auto;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+
+    .resume-card img{
+      width:100%;
+      height:auto;
+      display:block;
     }
 
     /* booking */
@@ -773,11 +814,6 @@
       .booking-grid{
         grid-template-columns:1fr;
       }
-
-      .highlights-grid-top,
-      .highlights-grid-bottom{
-        grid-template-columns:1fr 1fr;
-      }
     }
 
     @media (max-width: 680px){
@@ -846,17 +882,19 @@
       }
 
       .hero-middle{
-        align-items:flex-end;
-        padding-bottom:10px;
+        align-items:center;
+        padding-bottom:0;
       }
 
       .hero-copy{
         gap:10px;
         max-width:86vw;
+        margin-left:12px;
+        margin-top:8px;
       }
 
       .name-row{
-        gap:8px;
+        gap:8px 10px;
       }
 
       .name-word{
@@ -864,10 +902,24 @@
         padding:8px 12px;
       }
 
+      .name-word-left{
+        transform:translateY(-10px);
+      }
+
+      .name-word-right{
+        margin-left:8px;
+      }
+
+      .hero-bottom{
+        padding-left:12px;
+        padding-bottom:8px;
+      }
+
       .role-line{
         font-size:10px;
         letter-spacing:0.05em;
         padding:8px 10px;
+        margin-top:6px;
       }
 
       .section{
@@ -875,8 +927,9 @@
       }
 
       .bio-grid{
-        grid-template-columns:minmax(0, 1fr) 108px;
-        gap:12px;
+        grid-template-columns:minmax(0, 1fr) minmax(135px, 42%);
+        gap:14px;
+        align-items:start;
       }
 
       .bio-left{
@@ -884,12 +937,12 @@
       }
 
       .bio-text{
-        font-size:13px;
-        line-height:1.55;
+        font-size:12px;
+        line-height:1.45;
       }
 
       .bio-text p{
-        margin-bottom:10px;
+        margin-bottom:8px;
       }
 
       .bio-right{
@@ -929,8 +982,11 @@
         height:38px;
       }
     }
-  </style></head>
-<body>  <div class="topbar">
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
     <div class="container topbar-inner">
       <button class="menu-button" id="menuButton" aria-label="Open menu">
         <div class="burger">
@@ -940,7 +996,11 @@
         </div>
       </button>
     </div>
-  </div>  <div class="menu-overlay" id="menuOverlay"></div>  <aside class="side-menu" id="sideMenu">
+  </div>
+
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+  <aside class="side-menu" id="sideMenu">
     <div class="menu-inner">
       <ul class="menu-list">
         <li><a href="#home" class="menu-link"><span class="active-link">Home</span></a></li>
@@ -951,207 +1011,236 @@
         <li><a href="#contact" class="menu-link">Contact</a></li>
       </ul>
     </div>
-  </aside>  <section class="hero" id="home">
+  </aside>
+
+  <section class="hero" id="home">
     <div class="hero-image">
       <img src="hero-backgound.jpg" alt="Lola Grace performance photo">
-    </div><div class="container hero-content">
-  <div class="hero-top hero-animate delay-1">
-    <div class="hero-top-icons">
-      <a href="https://youtube.com/" target="_blank" class="top-social" aria-label="YouTube">
-        <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.5v-7L16 12l-6.4 3.5Z"/></svg>
-      </a>
-      <a href="https://www.facebook.com/share/18Ts4arHZg/?mibextid=wwXIfr" target="_blank" class="top-social" aria-label="Facebook">
-        <svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.7V5c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.4V11H7.5v3H10V22h3.5Z"/></svg>
-      </a>
     </div>
-  </div>
 
-  <div class="hero-middle">
-    <div class="hero-copy hero-animate delay-2">
-      <div class="name-row">
-        <div class="name-word">Lola</div>
-        <div class="name-word">Grace</div>
+    <div class="container hero-content">
+      <div class="hero-top hero-animate delay-1">
+        <div class="hero-top-icons">
+          <a href="https://youtube.com/" target="_blank" class="top-social" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.5v-7L16 12l-6.4 3.5Z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/share/18Ts4arHZg/?mibextid=wwXIfr" target="_blank" class="top-social" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.7V5c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.4V11H7.5v3H10V22h3.5Z"/></svg>
+          </a>
+        </div>
       </div>
 
-      <div class="role-line">Dancer | Contortionist | Aerialist</div>
-    </div>
-  </div>
+      <div class="hero-middle">
+        <div class="hero-copy hero-animate delay-2">
+          <div class="name-row">
+            <div class="name-word name-word-left">Lola</div>
+            <div class="name-word name-word-right">Grace</div>
+          </div>
 
-  <div class="hero-bottom hero-animate delay-3">
-    <div class="social-row">
-      <a href="http://www.tiktok.com/@lalarh06" target="_blank" class="hero-social" aria-label="TikTok">
-        <svg viewBox="0 0 24 24"><path d="M19.6 8.5a6.7 6.7 0 0 1-4-1.3v6.1a5.5 5.5 0 1 1-5.5-5.5c.4 0 .8 0 1.2.1v2.8a2.8 2.8 0 1 0 1.5 2.5V2h2.8a4 4 0 0 0 4 4v2.5Z"/></svg>
-      </a>
-      <a href="https://www.instagram.com/lolagrace06?igsh=MXN3aWU3cmkzMzZj" target="_blank" class="hero-social" aria-label="Instagram">
-        <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm10.3 1.6a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6Z"/></svg>
-      </a>
-    </div>
-  </div>
-</div>
+          <div class="role-line">Dancer | Contortionist | Aerialist</div>
+        </div>
+      </div>
 
-  </section>  <section class="biography section" id="biography">
+      <div class="hero-bottom hero-animate delay-3">
+        <div class="social-row">
+          <a href="http://www.tiktok.com/@lalarh06" target="_blank" class="hero-social" aria-label="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M19.6 8.5a6.7 6.7 0 0 1-4-1.3v6.1a5.5 5.5 0 1 1-5.5-5.5c.4 0 .8 0 1.2.1v2.8a2.8 2.8 0 1 0 1.5 2.5V2h2.8a4 4 0 0 0 4 4v2.5Z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/lolagrace06?igsh=MXN3aWU3cmkzMzZj" target="_blank" class="hero-social" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm10.3 1.6a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6Z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="biography section" id="biography">
     <div class="container bio-grid">
       <div class="bio-left reveal">
-        <h2 class="section-title">Biography</h2><div class="bio-text">
-      <p>Lola Grace is a dynamic and versatile performer specializing in dance, aerial arts, and contortion. With over a decade of training in contemporary, jazz, and ballet, she combines strong technical foundation with expressive artistry and stage presence.</p>
-      <p>Lola has performed professionally in both stage and commercial environments. She is currently featured as a dancer in Royal Caribbean’s production shows aboard Quantum of the Seas, delivering high-energy performances in large-scale theatrical productions. Prior to this, she performed at Universal Orlando in the DreamWorks Imagination Celebration, gaining valuable experience in live entertainment and character-driven performance.</p>
-      <p>In addition to her dance career, Lola is an accomplished aerialist and contortionist. She has worked with multiple entertainment companies including ESU Entertainment, Aerial Dragons, Odd-O-T’s Entertainment, and Cirque Vertigo. Her aerial repertoire includes lyra, straps, harness work, and flying pole, showcasing a unique combination of strength, flexibility, and control.</p>
-      <p>Lola’s performance background is complemented by her work as a teacher and choreographer, having trained and mentored dancers at institutions such as United Ballet Theatre and Dehner Elite Arts in Central Florida. She has also been involved in competitive and commercial dance projects, including Dancing With The Local Stars in North Carolina and campaigns with Dancelook.</p>
-      <p>Her training includes a full scholarship to the prestigious Joffrey Ballet School in New York City, where she completed an intensive program in contemporary and jazz. She further developed her skills at Xtreme Dance Studio and Anti-Gravity Orlando, expanding into aerial disciplines and performance techniques.</p>
-      <p>Driven, disciplined, and continuously evolving, Lola Grace brings a unique blend of elegance, athleticism, and versatility to every stage she steps on.</p>
+        <h2 class="section-title">Biography</h2>
+        <div class="bio-text">
+          <p>Lola Grace is a dynamic and versatile performer specializing in dance, aerial arts, and contortion. With over a decade of training in contemporary, jazz, and ballet, she combines strong technical foundation with expressive artistry and stage presence.</p>
+          <p>Lola has performed professionally in both stage and commercial environments. She is currently featured as a dancer in Royal Caribbean’s production shows aboard Quantum of the Seas, delivering high-energy performances in large-scale theatrical productions. Prior to this, she performed at Universal Orlando in the DreamWorks Imagination Celebration, gaining valuable experience in live entertainment and character-driven performance.</p>
+          <p>In addition to her dance career, Lola is an accomplished aerialist and contortionist. She has worked with multiple entertainment companies including ESU Entertainment, Aerial Dragons, Odd-O-T’s Entertainment, and Cirque Vertigo. Her aerial repertoire includes lyra, straps, harness work, and flying pole, showcasing a unique combination of strength, flexibility, and control.</p>
+          <p>Lola’s performance background is complemented by her work as a teacher and choreographer, having trained and mentored dancers at institutions such as United Ballet Theatre and Dehner Elite Arts in Central Florida. She has also been involved in competitive and commercial dance projects, including Dancing With The Local Stars in North Carolina and campaigns with Dancelook.</p>
+          <p>Her training includes a full scholarship to the prestigious Joffrey Ballet School in New York City, where she completed an intensive program in contemporary and jazz. She further developed her skills at Xtreme Dance Studio and Anti-Gravity Orlando, expanding into aerial disciplines and performance techniques.</p>
+          <p>Driven, disciplined, and continuously evolving, Lola Grace brings a unique blend of elegance, athleticism, and versatility to every stage she steps on.</p>
+        </div>
+      </div>
+
+      <div class="bio-right reveal">
+        <div class="stack-image"><img src="side-bio1.jpg" alt="Lola Grace portrait"></div>
+        <div class="stack-image"><img src="side-bio2.jpg" alt="Lola Grace performance image"></div>
+        <div class="stack-image"><img src="side-bio3.jpg" alt="Lola Grace dance photo"></div>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="bio-right reveal">
-    <div class="stack-image"><img src="side-bio1.jpg" alt="Lola Grace portrait"></div>
-    <div class="stack-image"><img src="side-bio2.jpg" alt="Lola Grace performance image"></div>
-    <div class="stack-image"><img src="side-bio3.jpg" alt="Lola Grace dance photo"></div>
-  </div>
-</div>
-
-  </section>  <section class="photos-section" id="photos">
+  <section class="photos-section" id="photos">
     <div class="container">
-      <h2 class="section-title brown reveal">Photos</h2><div class="photos-grid reveal">
-    <div class="photo-card"><img src="photo1.jpg" alt=""></div>
-    <div class="photo-card"><img src="photo2.jpg" alt=""></div>
-    <div class="photo-card"><img src="photo3.jpg" alt=""></div>
-    <div class="photo-card"><img src="photo4.jpg" alt=""></div>
-    <div class="photo-card"><img src="photo5.jpg" alt=""></div>
-    <div class="photo-card"><img src="photo6.jpg" alt=""></div>
-    <div class="photo-card"><img src="photo7.jpg" alt=""></div>
-    <div class="photo-card"><img src="photo8.jpg" alt=""></div>
-    <div class="photo-card"><img src="photo9.jpg" alt=""></div>
-    <div class="photo-card"><img src="photo10.jpg" alt=""></div>
-    <div class="photo-card"><img src="photo11.jpg" alt=""></div>
-    <div class="photo-card"><img src="photo12.jpg" alt=""></div>
-  </div>
-</div>
+      <h2 class="section-title brown reveal">Photos</h2>
+      <div class="photos-grid reveal">
+        <div class="photo-card"><img src="photo1.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo2.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo3.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo4.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo5.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo6.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo7.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo8.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo9.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo10.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo11.jpg" alt=""></div>
+        <div class="photo-card"><img src="photo12.jpg" alt=""></div>
+      </div>
+    </div>
+  </section>
 
-  </section>  <section class="reel-section" id="reels">
+  <section class="reel-section" id="reels">
     <div class="container">
-      <h2 class="section-title dark reveal">Dance Showreel</h2><div class="reel-box reveal">
-    <a class="reel-thumb" href="https://youtu.be/I-RLLMaF2-o?is=0G9rTTmyM4IkY6FV" target="_blank">
-      <img src="https://img.youtube.com/vi/I-RLLMaF2-o/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/I-RLLMaF2-o/hqdefault.jpg';" alt="Dance Showreel thumbnail">
-      <div class="play-button"></div>
-    </a>
-  </div>
-</div>
+      <h2 class="section-title dark reveal">Dance Showreel</h2>
+      <div class="reel-box reveal">
+        <a class="reel-thumb" href="https://youtu.be/I-RLLMaF2-o?is=0G9rTTmyM4IkY6FV" target="_blank">
+          <img src="https://img.youtube.com/vi/I-RLLMaF2-o/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/I-RLLMaF2-o/hqdefault.jpg';" alt="Dance Showreel thumbnail">
+          <div class="play-button"></div>
+        </a>
+      </div>
+    </div>
+  </section>
 
-  </section>  <section class="reel-section">
+  <section class="reel-section">
     <div class="container">
-      <h2 class="section-title dark reveal">Contortion / Aerial Reel</h2><div class="reel-box reveal">
-    <a class="reel-thumb" href="https://youtu.be/RXMSqpnMHjE?is=Fg862Mvuj9ondLP8" target="_blank">
-      <img src="https://img.youtube.com/vi/RXMSqpnMHjE/hqdefault.jpg" alt="Contortion aerial reel thumbnail">
-      <div class="play-button"></div>
-    </a>
-  </div>
-</div>
+      <h2 class="section-title dark reveal">Contortion / Aerial Reel</h2>
+      <div class="reel-box reveal">
+        <a class="reel-thumb" href="https://youtu.be/RXMSqpnMHjE?is=Fg862Mvuj9ondLP8" target="_blank">
+          <img src="https://img.youtube.com/vi/RXMSqpnMHjE/hqdefault.jpg" alt="Contortion aerial reel thumbnail">
+          <div class="play-button"></div>
+        </a>
+      </div>
+    </div>
+  </section>
 
-  </section>  <section class="reel-section">
+  <section class="reel-section">
     <div class="container">
-      <h2 class="section-title dark reveal">Aerial / Contortion Reel</h2><div class="reel-box reveal">
-    <a class="reel-thumb" href="https://youtu.be/O4oKH1IjFnU?is=X-9Erc__L9uQ9KQ7" target="_blank">
-      <img src="https://img.youtube.com/vi/O4oKH1IjFnU/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/O4oKH1IjFnU/hqdefault.jpg';" alt="Aerial contortion reel thumbnail">
-      <div class="play-button"></div>
-    </a>
-  </div>
-</div>
+      <h2 class="section-title dark reveal">Aerial / Contortion Reel</h2>
+      <div class="reel-box reveal">
+        <a class="reel-thumb" href="https://youtu.be/O4oKH1IjFnU?is=X-9Erc__L9uQ9KQ7" target="_blank">
+          <img src="https://img.youtube.com/vi/O4oKH1IjFnU/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/O4oKH1IjFnU/hqdefault.jpg';" alt="Aerial contortion reel thumbnail">
+          <div class="play-button"></div>
+        </a>
+      </div>
+    </div>
+  </section>
 
-  </section>  <section class="teaching-section" id="teaching">
+  <section class="teaching-section" id="teaching">
     <div class="teaching-stack">
       <div class="teach-panel reveal">
         <img src="teaching.jpg" alt="">
         <div class="teach-text gold teach-large teach-1">Teaching</div>
       </div>
-      
+
       <div class="teach-panel reveal">
-    <img src="solo.jpg" alt="">
-    <div class="teach-text gray teach-small teach-2">
-      Solo,<br>
-      Duo,<br>
-      Trio,<br>
-      &amp; Group<br>
-      Choreo
-    </div>
-  </div>
+        <img src="solo.jpg" alt="">
+        <div class="teach-text gray teach-small teach-2">
+          Solo,<br>
+          Duo,<br>
+          Trio,<br>
+          &amp; Group<br>
+          Choreo
+        </div>
+      </div>
 
       <div class="teach-panel reveal">
         <img src="contortion.jpg" alt="">
-        <div class="teach-text white teach-small teach-3">
-      Contortion
-    </div>
-  </div>
-      
-  <div class="teach-panel reveal">
-    <img src="Aerial.jpg" alt="">
-    <div class="teach-text gray teach-small teach-5">
-      Aerial
-    </div>
-  </div>
-</div>
+        <div class="teach-text white teach-small teach-3">Contortion</div>
+      </div>
 
-  </section>  <section class="section" id="booking">
-    <div class="container">
-      <h2 class="section-title reveal">Booking</h2><div class="booking-grid">
-    <div class="booking-card reveal">
-      <h3>Available For</h3>
-      <div class="booking-list">
-        <div class="booking-item">Private Events</div>
-        <div class="booking-item">Corporate Events</div>
-        <div class="booking-item">Brand Collaborations</div>
-        <div class="booking-item">Live Performances</div>
+      <div class="teach-panel reveal">
+        <img src="Aerial.jpg" alt="">
+        <div class="teach-text gray teach-small teach-5">Aerial</div>
       </div>
     </div>
+  </section>
 
-    <div class="booking-card reveal">
-      <h3>Booking Request</h3>
-      <form class="form" onsubmit="event.preventDefault(); alert('Replace this with your real booking form later.');">
-        <input class="field" type="text" placeholder="Your name" required>
-        <input class="field" type="email" placeholder="Your email" required>
-        <input class="field" type="text" placeholder="Event / venue">
-        <textarea class="field" placeholder="Tell me about your request"></textarea>
-        <button class="submit-btn" type="submit">Send Request</button>
-      </form>
+  <section class="resume-section" id="resume">
+    <div class="container">
+      <h2 class="section-title reveal">Resume</h2>
+      <div class="resume-card reveal">
+        <img src="resume-photo.jpg" alt="Lola Grace resume">
+      </div>
     </div>
-  </div>
-</div>
+  </section>
 
-  </section>  <section class="section" id="contact">
+  <section class="section" id="booking">
+    <div class="container">
+      <h2 class="section-title reveal">Booking</h2>
+      <div class="booking-grid">
+        <div class="booking-card reveal">
+          <h3>Available For</h3>
+          <div class="booking-list">
+            <div class="booking-item">Private Events</div>
+            <div class="booking-item">Corporate Events</div>
+            <div class="booking-item">Brand Collaborations</div>
+            <div class="booking-item">Live Performances</div>
+          </div>
+        </div>
+
+        <div class="booking-card reveal">
+          <h3>Booking Request</h3>
+          <form class="form" action="https://formspree.io/f/xzdkgjbz" method="POST">
+            <input class="field" type="text" name="name" placeholder="Your name" required>
+            <input class="field" type="email" name="email" placeholder="Your email" required>
+            <input class="field" type="text" name="event" placeholder="Event / venue">
+            <textarea class="field" name="message" placeholder="Tell me about your request" required></textarea>
+            <input type="hidden" name="_subject" value="New booking request from Lola Grace website">
+            <button class="submit-btn" type="submit">Send Request</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
     <div class="container">
       <div class="contact-box reveal">
         <h3>Contact</h3>
-        <p></p><div class="contact-socials">
-      <a href="mailto:lrobertshouse@gmail.com" class="contact-circle" aria-label="Email">
-        <svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm0 2v.5l9 6 9-6V7l-9 6-9-6Z"/></svg>
-      </a>
+        <p></p>
 
-      <a href="https://www.instagram.com/lolagrace06?igsh=MXN3aWU3cmkzMzZj" target="_blank" class="contact-circle" aria-label="Instagram">
-        <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm10.3 1.6a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6Z"/></svg>
-      </a>
+        <div class="contact-socials">
+          <a href="mailto:lrobertshouse@gmail.com" class="contact-circle" aria-label="Email">
+            <svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm0 2v.5l9 6 9-6V7l-9 6-9-6Z"/></svg>
+          </a>
 
-      <a href="https://www.facebook.com/share/18Ts4arHZg/?mibextid=wwXIfr" target="_blank" class="contact-circle" aria-label="Facebook">
-        <svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.7V5c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.4V11H7.5v3H10V22h3.5Z"/></svg>
-      </a>
+          <a href="https://www.instagram.com/lolagrace06?igsh=MXN3aWU3cmkzMzZj" target="_blank" class="contact-circle" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm10.3 1.6a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6Z"/></svg>
+          </a>
 
-      <a href="http://www.tiktok.com/@lalarh06" target="_blank" class="contact-circle" aria-label="TikTok">
-        <svg viewBox="0 0 24 24"><path d="M19.6 8.5a6.7 6.7 0 0 1-4-1.3v6.1a5.5 5.5 0 1 1-5.5-5.5c.4 0 .8 0 1.2.1v2.8a2.8 2.8 0 1 0 1.5 2.5V2h2.8a4 4 0 0 0 4 4v2.5Z"/></svg>
-      </a>
+          <a href="https://www.facebook.com/share/18Ts4arHZg/?mibextid=wwXIfr" target="_blank" class="contact-circle" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.7V5c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.4V11H7.5v3H10V22h3.5Z"/></svg>
+          </a>
 
-      <a href="https://youtube.com/@lolagrace06?si=lyduQHERA7NhZfeg" target="_blank" class="contact-circle" aria-label="YouTube">
-        <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.5v-7L16 12l-6.4 3.5Z"/></svg>
-      </a>
+          <a href="http://www.tiktok.com/@lalarh06" target="_blank" class="contact-circle" aria-label="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M19.6 8.5a6.7 6.7 0 0 1-4-1.3v6.1a5.5 5.5 0 1 1-5.5-5.5c.4 0 .8 0 1.2.1v2.8a2.8 2.8 0 1 0 1.5 2.5V2h2.8a4 4 0 0 0 4 4v2.5Z"/></svg>
+          </a>
+
+          <a href="https://youtube.com/@lolagrace06?si=lyduQHERA7NhZfeg" target="_blank" class="contact-circle" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.5v-7L16 12l-6.4 3.5Z"/></svg>
+          </a>
+        </div>
+
+        <div class="contact-email">lrobertshouse@gmail.com</div>
+      </div>
     </div>
+  </section>
 
-    <div class="contact-email">lrobertshouse@gmail.com</div>
-  </div>
-</div>
-
-  </section>  <footer>
+  <footer>
     <div class="container footer-inner">
       <div>© 2026 Lola Grace Roberts-House</div>
       <div>Dancer | Contortionist | Aerialist</div>
     </div>
-  </footer>  <script>
+  </footer>
+
+  <script>
     const menuButton = document.getElementById("menuButton");
     const sideMenu = document.getElementById("sideMenu");
     const menuOverlay = document.getElementById("menuOverlay");
@@ -1198,5 +1287,6 @@
     }, { threshold: 0.12 });
 
     reveals.forEach(item => observer.observe(item));
-  </script></body>
+  </script>
+</body>
 </html>
