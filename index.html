@@ -77,12 +77,28 @@
     }
 
     .topbar-inner{
-      min-height:52px;
-      display:flex;
-      align-items:center;
-      justify-content:flex-end;
+  min-height:52px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding-left:12px;
     }
 
+    .topbar-role{
+  min-width:0;
+  max-width:calc(100% - 56px);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  font-family:"Montserrat", sans-serif;
+  font-weight:800;
+  font-size:clamp(10px, 1.25vw, 14px);
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:#111111;
+    }
+    
     .menu-button{
       width:44px;
       height:44px;
@@ -294,52 +310,28 @@
     .hero-name{
   position:absolute;
   font-family:"Montserrat", sans-serif;
-  font-size:clamp(34px, 6.8vw, 72px);
-  font-weight:700;
+  font-size:clamp(36px, 7vw, 74px);
+  font-weight:900;
   line-height:0.92;
-  letter-spacing:0.12em;
+  letter-spacing:0.02em;
   text-transform:uppercase;
-  color:var(--heroText);
+  color:#dce6f6;
   text-shadow:
     0 2px 0 rgba(255,255,255,0.08),
-    0 10px 24px rgba(0,0,0,0.28),
-    0 0 18px rgba(170,210,255,0.12);
+    0 8px 20px rgba(0,0,0,0.28),
+    0 0 18px rgba(148,188,255,0.16);
   z-index:3;
-}
+    }
 
 .hero-name-lola{
   left:24px;
-  top:40%;
+  top:42%;
 }
 
 .hero-name-grace{
   right:20px;
-  top:56%;
+  top:57%;
   text-align:right;
-}
-
-.hero-role-badge{
-  position:absolute;
-  left:18px;
-  right:110px;
-  top:18px;
-  bottom:auto;
-  max-width:none;
-  padding:8px 12px;
-  border-radius:999px;
-  background:rgba(255,255,255,0.58);
-  border:1px solid rgba(255,255,255,0.45);
-  backdrop-filter:blur(8px);
-  box-shadow:0 10px 24px rgba(0,0,0,0.10);
-  font-family:"Montserrat", sans-serif;
-  font-weight:800;
-  font-size:clamp(11px, 1.25vw, 14px);
-  color:#111111;
-  text-transform:uppercase;
-  letter-spacing:0.09em;
-  line-height:1.1;
-  text-shadow:none;
-  z-index:3;
 }
 
     /* common */
@@ -865,7 +857,14 @@
       }
 
       .topbar-inner{
-        min-height:46px;
+  min-height:46px;
+  padding-left:10px;
+  gap:10px;
+      }
+      .topbar-role{
+  max-width:calc(100% - 50px);
+  font-size:9px;
+  letter-spacing:0.05em;
       }
 
       .menu-button{
@@ -932,18 +931,18 @@
       }
 
       .hero-name{
-  font-size:clamp(28px, 7.2vw, 42px);
-  letter-spacing:0.10em;
+  font-size:clamp(28px, 7.4vw, 42px);
+  letter-spacing:0.015em;
 }
 
 .hero-name-lola{
   left:14px;
-  top:39%;
+  top:40%;
 }
 
 .hero-name-grace{
   right:14px;
-  top:55%;
+  top:56%;
 }
 
 .hero-role-badge{
@@ -1046,18 +1045,18 @@
 </head>
 <body>
 
-  <div class="topbar">
-    <div class="container topbar-inner">
-      <button class="menu-button" id="menuButton" aria-label="Open menu">
-        <div class="burger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </button>
-    </div>
-  </div>
+  <div class="container topbar-inner">
+  <div class="topbar-role">Dancer | Contortionist | Aerialist</div>
 
+  <button class="menu-button" id="menuButton" aria-label="Open menu">
+    <div class="burger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </button>
+  </div>
+  
   <div class="menu-overlay" id="menuOverlay"></div>
 
   <aside class="side-menu" id="sideMenu">
@@ -1099,8 +1098,6 @@
             <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm10.3 1.6a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6Z"/></svg>
           </a>
         </div>
-
-        <div class="hero-role-badge hero-animate delay-3">Dancer | Contortionist | Aerialist</div>
       </div>
     </div>
   </section>
