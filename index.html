@@ -12,16 +12,16 @@
 
   <style>
     :root{
-      --bg:#f2f2f2;
-      --panel:#ffffff;
-      --line:#dddddd;
-      --menuText:#32465f;
-      --bodyText:#1f1f1f;
-      --muted:#595959;
-      --shadow:0 12px 28px rgba(0,0,0,0.06);
-      --transition:0.35s ease;
-      --max:1320px;
-      --heroText:#eef5ff;
+  --bg:#f2f2f2;
+  --panel:#ffffff;
+  --line:#dddddd;
+  --menuText:#32465f;
+  --bodyText:#1f1f1f;
+  --muted:#595959;
+  --shadow:0 12px 28px rgba(0,0,0,0.06);
+  --transition:0.35s ease;
+  --max:1320px;
+  --heroText:#f8fbff;
     }
 
     *{
@@ -292,52 +292,55 @@
     }
 
     .hero-name{
-      position:absolute;
-      font-family:"Montserrat", sans-serif;
-      font-size:clamp(36px, 7vw, 74px);
-      font-weight:900;
-      line-height:0.88;
-      letter-spacing:0.04em;
-      text-transform:uppercase;
-      color:var(--heroText);
-      text-shadow:0 10px 28px rgba(0,0,0,0.35);
-      max-width:42%;
-      z-index:3;
-    }
+  position:absolute;
+  font-family:"Montserrat", sans-serif;
+  font-size:clamp(34px, 6.8vw, 72px);
+  font-weight:700;
+  line-height:0.92;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--heroText);
+  text-shadow:
+    0 2px 0 rgba(255,255,255,0.08),
+    0 10px 24px rgba(0,0,0,0.28),
+    0 0 18px rgba(170,210,255,0.12);
+  z-index:3;
+}
 
-    .hero-name-lola{
-      left:18px;
-      top:42%;
-    }
+.hero-name-lola{
+  left:24px;
+  top:40%;
+}
 
-    .hero-name-grace{
-      right:18px;
-      top:56%;
-      text-align:right;
-      max-width:34%;
-    }
+.hero-name-grace{
+  right:20px;
+  top:56%;
+  text-align:right;
+}
 
-    .hero-role-badge{
-      position:absolute;
-      right:18px;
-      bottom:18px;
-      max-width:calc(100% - 150px);
-      padding:12px 16px;
-      border-radius:18px;
-      background:linear-gradient(90deg, rgba(5,11,22,0.74), rgba(5,11,22,0.54));
-      border:1px solid rgba(255,255,255,0.18);
-      backdrop-filter:blur(8px);
-      box-shadow:0 16px 36px rgba(0,0,0,0.18);
-      font-family:"Montserrat", sans-serif;
-      font-weight:800;
-      font-size:clamp(12px, 1.5vw, 17px);
-      color:#f4f8ff;
-      text-transform:uppercase;
-      letter-spacing:0.08em;
-      line-height:1.1;
-      text-shadow:0 4px 14px rgba(0,0,0,0.25);
-      z-index:3;
-    }
+.hero-role-badge{
+  position:absolute;
+  left:18px;
+  right:110px;
+  top:18px;
+  bottom:auto;
+  max-width:none;
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.58);
+  border:1px solid rgba(255,255,255,0.45);
+  backdrop-filter:blur(8px);
+  box-shadow:0 10px 24px rgba(0,0,0,0.10);
+  font-family:"Montserrat", sans-serif;
+  font-weight:800;
+  font-size:clamp(11px, 1.25vw, 14px);
+  color:#111111;
+  text-transform:uppercase;
+  letter-spacing:0.09em;
+  line-height:1.1;
+  text-shadow:none;
+  z-index:3;
+}
 
     /* common */
     .section{
@@ -929,31 +932,31 @@
       }
 
       .hero-name{
-        font-size:clamp(28px, 8vw, 46px);
-        max-width:44%;
-      }
+  font-size:clamp(28px, 7.2vw, 42px);
+  letter-spacing:0.10em;
+}
 
-      .hero-name-lola{
-        left:14px;
-        top:40%;
-      }
+.hero-name-lola{
+  left:14px;
+  top:39%;
+}
 
-      .hero-name-grace{
-        right:14px;
-        top:54%;
-        max-width:36%;
-      }
+.hero-name-grace{
+  right:14px;
+  top:55%;
+}
 
-      .hero-role-badge{
-        right:12px;
-        bottom:12px;
-        max-width:calc(100% - 102px);
-        padding:10px 12px;
-        border-radius:16px;
-        font-size:10px;
-        letter-spacing:0.05em;
-        line-height:1.15;
-      }
+.hero-role-badge{
+  left:12px;
+  right:96px;
+  top:12px;
+  bottom:auto;
+  padding:7px 10px;
+  border-radius:999px;
+  font-size:9px;
+  letter-spacing:0.05em;
+  line-height:1.1;
+}
 
       .section{
         padding:22px 0;
