@@ -12,18 +12,18 @@
 
   <style>
     :root{
-  --bg:#f2f2f2;
-  --panel:#ffffff;
-  --line:#dddddd;
-  --menuText:#32465f;
-  --bodyText:#1f1f1f;
-  --muted:#595959;
-  --shadow:0 12px 28px rgba(0,0,0,0.06);
-  --transition:0.35s ease;
-  --max:1320px;
-  --heroText:#f4f8ff;
-  --heroGlow:rgba(126,190,255,0.35);
+      --bg:#f2f2f2;
+      --panel:#ffffff;
+      --line:#dddddd;
+      --menuText:#32465f;
+      --bodyText:#1f1f1f;
+      --muted:#595959;
+      --shadow:0 12px 28px rgba(0,0,0,0.06);
+      --transition:0.35s ease;
+      --max:1320px;
+      --heroText:#eef5ff;
     }
+
     *{
       margin:0;
       padding:0;
@@ -195,159 +195,150 @@
     }
 
     /* hero */
-    /* hero */
-.hero{
-  padding-top:52px;
-  background:var(--bg);
-}
+    .hero{
+      padding-top:52px;
+      background:var(--bg);
+    }
 
-.hero-stage{
-  position:relative;
-  overflow:hidden;
-  background:#081223;
-  min-height:640px;
-  height:calc(100vh - 52px);
-  max-height:860px;
-}
+    .hero-stage{
+      position:relative;
+      overflow:hidden;
+      background:#081223;
+      min-height:640px;
+      height:calc(100vh - 52px);
+      max-height:860px;
+    }
 
-.hero-bg{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center center;
-  transform:scale(1.02);
-}
+    .hero-bg{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center center;
+    }
 
-.hero-stage::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(180deg, rgba(3,8,18,0.08) 0%, rgba(3,8,18,0.14) 26%, rgba(3,8,18,0.24) 58%, rgba(3,8,18,0.52) 100%);
-  z-index:1;
-  pointer-events:none;
-}
+    .hero-stage::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(4,10,20,0.10) 0%, rgba(4,10,20,0.10) 24%, rgba(4,10,20,0.18) 55%, rgba(4,10,20,0.46) 100%);
+      z-index:1;
+      pointer-events:none;
+    }
 
-.hero-stage::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle at 24% 26%, rgba(108,175,255,0.22), transparent 24%),
-    radial-gradient(circle at 72% 24%, rgba(70,125,255,0.12), transparent 24%),
-    linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
-  z-index:1;
-  pointer-events:none;
-}
+    .hero-stage::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 25% 28%, rgba(100,170,255,0.22), transparent 28%),
+        radial-gradient(circle at 75% 24%, rgba(50,110,255,0.14), transparent 24%);
+      z-index:1;
+      pointer-events:none;
+    }
 
-.hero-layer{
-  position:relative;
-  z-index:2;
-  width:100%;
-  height:100%;
-}
+    .hero-layer{
+      position:relative;
+      z-index:2;
+      width:100%;
+      height:100%;
+    }
 
-.hero-top-icons{
-  position:absolute;
-  top:18px;
-  right:18px;
-  display:flex;
-  gap:8px;
-  align-items:center;
-}
+    .hero-top-icons{
+      position:absolute;
+      top:18px;
+      right:18px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
 
-.hero-bottom-socials{
-  position:absolute;
-  left:18px;
-  bottom:18px;
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
+    .hero-bottom-socials{
+      position:absolute;
+      left:18px;
+      bottom:18px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
 
-.hero-social{
-  width:36px;
-  height:36px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,0.44);
-  background:rgba(9,17,31,0.34);
-  color:#ffffff;
-  backdrop-filter:blur(6px);
-  box-shadow:
-    0 8px 18px rgba(0,0,0,0.18),
-    inset 0 0 0 1px rgba(255,255,255,0.03);
-  transition:var(--transition);
-}
+    .hero-social{
+      width:38px;
+      height:38px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,0.42);
+      background:rgba(7,15,29,0.42);
+      color:#ffffff;
+      backdrop-filter:blur(6px);
+      box-shadow:0 10px 22px rgba(0,0,0,0.18);
+      transition:var(--transition);
+    }
 
-.hero-social:hover{
-  transform:translateY(-2px);
-  background:rgba(9,17,31,0.5);
-}
+    .hero-social:hover{
+      transform:translateY(-2px);
+      background:rgba(7,15,29,0.55);
+    }
 
-.hero-social svg{
-  width:15px;
-  height:15px;
-  fill:currentColor;
-  display:block;
-}
+    .hero-social svg{
+      width:16px;
+      height:16px;
+      fill:currentColor;
+      display:block;
+    }
 
-.hero-name{
-  position:absolute;
-  font-family:"Montserrat", sans-serif;
-  font-size:clamp(38px, 7.2vw, 78px);
-  font-weight:900;
-  line-height:0.9;
-  letter-spacing:0.045em;
-  text-transform:uppercase;
-  color:var(--heroText);
-  text-shadow:
-    0 2px 0 rgba(255,255,255,0.04),
-    0 10px 28px rgba(0,0,0,0.34),
-    0 0 20px var(--heroGlow);
-  z-index:3;
-}
+    .hero-name{
+      position:absolute;
+      font-family:"Montserrat", sans-serif;
+      font-size:clamp(36px, 7vw, 74px);
+      font-weight:900;
+      line-height:0.88;
+      letter-spacing:0.04em;
+      text-transform:uppercase;
+      color:var(--heroText);
+      text-shadow:0 10px 28px rgba(0,0,0,0.35);
+      max-width:42%;
+      z-index:3;
+    }
 
-.hero-name-lola{
-  left:18px;
-  top:39%;
-}
+    .hero-name-lola{
+      left:18px;
+      top:42%;
+    }
 
-.hero-name-grace{
-  right:18px;
-  top:55%;
-  text-align:right;
-}
+    .hero-name-grace{
+      right:18px;
+      top:56%;
+      text-align:right;
+      max-width:34%;
+    }
 
-.hero-role-badge{
-  position:absolute;
-  right:18px;
-  bottom:18px;
-  max-width:calc(100% - 150px);
-  padding:11px 15px;
-  border-radius:18px;
-  background:
-    linear-gradient(90deg, rgba(4,10,20,0.78), rgba(8,18,36,0.58));
-  border:1px solid rgba(255,255,255,0.16);
-  backdrop-filter:blur(10px);
-  box-shadow:
-    0 16px 36px rgba(0,0,0,0.18),
-    inset 0 0 0 1px rgba(255,255,255,0.02);
-  font-family:"Montserrat", sans-serif;
-  font-weight:800;
-  font-size:clamp(12px, 1.45vw, 16px);
-  color:#f7fbff;
-  text-transform:uppercase;
-  letter-spacing:0.09em;
-  line-height:1.15;
-  text-shadow:0 4px 14px rgba(0,0,0,0.22);
-  z-index:3;
-}
-      
+    .hero-role-badge{
+      position:absolute;
+      right:18px;
+      bottom:18px;
+      max-width:calc(100% - 150px);
+      padding:12px 16px;
+      border-radius:18px;
+      background:linear-gradient(90deg, rgba(5,11,22,0.74), rgba(5,11,22,0.54));
+      border:1px solid rgba(255,255,255,0.18);
+      backdrop-filter:blur(8px);
+      box-shadow:0 16px 36px rgba(0,0,0,0.18);
+      font-family:"Montserrat", sans-serif;
+      font-weight:800;
+      font-size:clamp(12px, 1.5vw, 17px);
+      color:#f4f8ff;
+      text-transform:uppercase;
+      letter-spacing:0.08em;
+      line-height:1.1;
+      text-shadow:0 4px 14px rgba(0,0,0,0.25);
+      z-index:3;
+    }
+
     /* common */
     .section{
       padding:26px 0;
@@ -905,64 +896,64 @@
       }
 
       .hero{
-  padding-top:46px;
-}
+        padding-top:46px;
+      }
 
-.hero-stage{
-  min-height:0;
-  height:auto;
-  max-height:none;
-  aspect-ratio:1 / 1;
-}
+      .hero-stage{
+        min-height:0;
+        height:auto;
+        max-height:none;
+        aspect-ratio:1 / 1;
+      }
 
-.hero-top-icons{
-  top:14px;
-  right:14px;
-  gap:8px;
-}
+      .hero-top-icons{
+        top:14px;
+        right:14px;
+        gap:8px;
+      }
 
-.hero-bottom-socials{
-  left:12px;
-  bottom:12px;
-  gap:8px;
-}
+      .hero-bottom-socials{
+        left:12px;
+        bottom:12px;
+        gap:8px;
+      }
 
-.hero-social{
-  width:32px;
-  height:32px;
-}
+      .hero-social{
+        width:34px;
+        height:34px;
+      }
 
-.hero-social svg{
-  width:13px;
-  height:13px;
-}
+      .hero-social svg{
+        width:14px;
+        height:14px;
+      }
 
-.hero-name{
-  font-size:clamp(30px, 8vw, 48px);
-  letter-spacing:0.04em;
-}
+      .hero-name{
+        font-size:clamp(28px, 8vw, 46px);
+        max-width:44%;
+      }
 
-.hero-name-lola{
-  left:14px;
-  top:38%;
-}
+      .hero-name-lola{
+        left:14px;
+        top:40%;
+      }
 
-.hero-name-grace{
-  right:14px;
-  top:53%;
-}
+      .hero-name-grace{
+        right:14px;
+        top:54%;
+        max-width:36%;
+      }
 
-.hero-role-badge{
-  right:12px;
-  bottom:12px;
-  max-width:calc(100% - 98px);
-  padding:10px 12px;
-  border-radius:16px;
-  font-size:10px;
-  letter-spacing:0.06em;
-  line-height:1.15;
-}
-    
+      .hero-role-badge{
+        right:12px;
+        bottom:12px;
+        max-width:calc(100% - 102px);
+        padding:10px 12px;
+        border-radius:16px;
+        font-size:10px;
+        letter-spacing:0.05em;
+        line-height:1.15;
+      }
 
       .section{
         padding:22px 0;
@@ -1130,7 +1121,6 @@
         <div class="stack-image wide"><img src="side-bio2.jpg" alt="Lola Grace performance image"></div>
         <div class="stack-image tall"><img src="side-bio3.jpg" alt="Lola Grace dance photo"></div>
         <div class="stack-image tall"><img src="photo5.jpg" alt="Lola Grace extra photo"></div>
-        <div class="stack-image tall"><img src="photo9.jpg" alt="Lola Grace extra photo"></div>
       </div>
     </div>
   </section>
@@ -1389,4 +1379,4 @@
     });
   </script>
 </body>
-</html>
+  </html>
