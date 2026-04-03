@@ -21,6 +21,7 @@
       --shadow:0 12px 28px rgba(0,0,0,0.06);
       --transition:0.35s ease;
       --max:1320px;
+      --heroBlue:#bcd6ff;
     }
 
     *{
@@ -146,7 +147,7 @@
       position:fixed;
       top:0;
       right:0;
-      width:min(180px, 58vw);
+      width:min(170px, 56vw);
       height:100vh;
       background:#f3f3f3;
       z-index:120;
@@ -194,109 +195,94 @@
     }
 
     /* hero */
-     .hero{
-      position:relative;
-      min-height:70vh;
+    .hero{
       padding-top:52px;
+      background:var(--bg);
+    }
+
+    .hero-stage{
+      position:relative;
+      width:100%;
+      min-height:620px;
+      max-height:860px;
+      height:calc(100vh - 52px);
       overflow:hidden;
       background:#0f1b2c;
     }
 
-    .hero-image{
+    .hero-bg{
       position:absolute;
-      inset:52px 0 0 0;
-      overflow:hidden;
-    }
-
-    .hero-image img{
+      inset:0;
       width:100%;
       height:100%;
       object-fit:cover;
       object-position:center top;
     }
 
-    .hero-image::after{
+    .hero-stage::after{
       content:"";
       position:absolute;
       inset:0;
       background:
-        linear-gradient(180deg, rgba(5,12,22,0.08) 0%, rgba(5,12,22,0.08) 28%, rgba(5,12,22,0.14) 55%, rgba(5,12,22,0.45) 100%),
+        linear-gradient(180deg, rgba(5,12,22,0.08) 0%, rgba(5,12,22,0.08) 28%, rgba(5,12,22,0.14) 55%, rgba(5,12,22,0.3) 100%),
         radial-gradient(circle at center, rgba(82,142,255,0.08), transparent 44%);
       pointer-events:none;
     }
 
-    .hero-content{
+    .hero-layer{
       position:relative;
-      min-height:calc(70vh - 52px);
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      padding:0;
+      z-index:2;
+      width:100%;
+      height:100%;
     }
 
-    .hero-top{
-      display:flex;
-      justify-content:flex-end;
-      padding:18px 18px 0 0;
-    }
-
-    .hero-top-icons,
-    .social-row{
+    .hero-top-icons{
+      position:absolute;
+      top:18px;
+      right:18px;
       display:flex;
       gap:8px;
       align-items:center;
     }
 
-    .top-social,
+    .hero-bottom-icons{
+      position:absolute;
+      left:18px;
+      bottom:18px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+
     .hero-social{
-      width:34px;
-      height:34px;
+      width:38px;
+      height:38px;
       display:flex;
       align-items:center;
       justify-content:center;
       border-radius:50%;
-      background:rgba(10,18,34,0.18);
-      color:#ffffff;
-      border:1px solid rgba(255,255,255,0.22);
+      background:rgba(12,18,32,0.18);
+      color:#111;
+      border:1px solid rgba(255,255,255,0.34);
       backdrop-filter:blur(6px);
       box-shadow:0 10px 22px rgba(0,0,0,0.12);
       transition:var(--transition);
     }
 
-    .top-social:hover,
     .hero-social:hover{
       transform:translateY(-2px);
-      background:rgba(10,18,34,0.28);
+      background:rgba(255,255,255,0.22);
     }
 
-    .top-social svg,
     .hero-social svg{
-      width:16px;
-      height:16px;
+      width:18px;
+      height:18px;
       fill:currentColor;
       display:block;
     }
 
-    .hero-middle{
-      flex:1;
-      display:block;
-    }
-
-    .hero-copy{
-      position:relative;
-      width:100%;
-      min-height:calc(70vh - 52px);
-      max-width:none;
-      margin:0;
-    }
-
-    .name-row{
-      position:relative;
-      width:100%;
-      height:100%;
-    }
-
-    .name-word{
+    .hero-name-left,
+    .hero-name-right{
       position:absolute;
       font-family:"Montserrat", sans-serif;
       font-size:clamp(34px, 7vw, 82px);
@@ -304,55 +290,35 @@
       line-height:0.9;
       letter-spacing:0.04em;
       text-transform:uppercase;
-      color:#bcd6ff;
-      text-shadow:0 4px 18px rgba(0,0,0,0.28);
-      padding:0;
-      border:none;
-      background:none;
-      border-radius:0;
-      backdrop-filter:none;
+      color:var(--heroBlue);
+      text-shadow:0 4px 18px rgba(0,0,0,0.22);
     }
 
-    .name-word-left{
+    .hero-name-left{
       left:18px;
-      top:26%;
+      top:29%;
     }
 
-    .name-word-right{
+    .hero-name-right{
       right:18px;
-      top:37%;
+      top:42%;
       text-align:right;
     }
 
-    .role-line{
+    .hero-role{
       position:absolute;
       left:18px;
       right:18px;
-      bottom:108px;
+      bottom:88px;
       font-family:"Montserrat", sans-serif;
       font-weight:800;
       font-size:clamp(12px, 1.7vw, 18px);
-      color:#eef5ff;
+      color:#0f1116;
       text-transform:uppercase;
-      letter-spacing:0.05em;
-      padding:0;
-      background:none;
-      border:none;
-      border-radius:0;
-      text-shadow:0 2px 12px rgba(0,0,0,0.45);
+      letter-spacing:0.08em;
+      text-shadow:0 2px 10px rgba(255,255,255,0.16);
     }
 
-    .hero-bottom{
-      position:absolute;
-      left:18px;
-      bottom:26px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      align-items:flex-start;
-      padding:0;
-    }
-   
     /* common */
     .section{
       padding:26px 0;
@@ -420,8 +386,8 @@
 
     .bio-grid{
       display:grid;
-      grid-template-columns:minmax(0, 1.2fr) minmax(240px, 0.8fr);
-      gap:22px;
+      grid-template-columns:minmax(0, 1.28fr) minmax(250px, 0.72fr);
+      gap:20px;
       align-items:start;
     }
 
@@ -432,8 +398,8 @@
 
     .bio-text{
       max-width:none;
-      font-size:13px;
-      line-height:1.55;
+      font-size:12.5px;
+      line-height:1.5;
       color:#2c2c2c;
     }
 
@@ -443,7 +409,7 @@
 
     .bio-right{
       display:grid;
-      gap:12px;
+      gap:10px;
       align-content:start;
       background:transparent;
       border:none;
@@ -452,17 +418,23 @@
     .stack-image{
       width:100%;
       overflow:hidden;
-      border-radius:12px;
-      box-shadow:var(--shadow);
+      border-radius:0;
       background:#ddd;
     }
 
     .stack-image img{
       width:100%;
       height:100%;
-      aspect-ratio:3 / 4;
       object-fit:cover;
       display:block;
+    }
+
+    .stack-image.tall img{
+      aspect-ratio:3 / 4;
+    }
+
+    .stack-image.wide img{
+      aspect-ratio:3 / 1.7;
     }
 
     /* photos */
@@ -603,7 +575,7 @@
       transform:none;
       padding:10px 16px;
       border-radius:14px;
-      background:rgba(11,18,30,0.34);
+      background:rgba(11,18,30,0.28);
       border:1px solid rgba(255,255,255,0.14);
       backdrop-filter:blur(4px);
       box-shadow:0 10px 26px rgba(0,0,0,0.18);
@@ -898,7 +870,7 @@
       }
 
       .side-menu{
-        width:min(150px, 52vw);
+        width:min(145px, 50vw);
       }
 
       .menu-list a{
@@ -907,69 +879,57 @@
       }
 
       .hero{
-        min-height:66vh;
         padding-top:46px;
       }
 
-      .hero-image{
-        inset:46px 0 0 0;
+      .hero-stage{
+        min-height:auto;
+        height:auto;
+        max-height:none;
+        aspect-ratio:1 / 1;
       }
 
-      .hero-content{
-        min-height:calc(66vh - 46px);
-        padding:0;
+      .hero-top-icons{
+        top:14px;
+        right:14px;
       }
 
-      .top-social,
+      .hero-bottom-icons{
+        left:14px;
+        bottom:14px;
+      }
+
       .hero-social{
-        width:30px;
-        height:30px;
+        width:34px;
+        height:34px;
       }
 
-      .top-social svg,
       .hero-social svg{
-        width:14px;
-        height:14px;
+        width:16px;
+        height:16px;
       }
 
-      .hero-top{
-        padding:14px 16px 0 0;
+      .hero-name-left,
+      .hero-name-right{
+        font-size:clamp(30px, 8.7vw, 50px);
       }
 
-      .hero-middle{
-        display:block;
+      .hero-name-left{
+        left:14px;
+        top:34%;
       }
 
-      .hero-copy{
-        min-height:calc(66vh - 46px);
-        max-width:none;
-        margin:0;
+      .hero-name-right{
+        right:14px;
+        top:47%;
       }
 
-      .name-word{
-        font-size:clamp(28px, 8.6vw, 48px);
-      }
-
-      .name-word-left{
-        left:16px;
-        top:25%;
-      }
-
-      .name-word-right{
-        right:16px;
-        top:35%;
-      }
-
-      .role-line{
-        left:16px;
-        right:16px;
-        bottom:102px;
-        font-size:11px;
-      }
-
-      .hero-bottom{
-        left:16px;
-        bottom:18px;
+      .hero-role{
+        left:14px;
+        right:14px;
+        bottom:70px;
+        font-size:10px;
+        letter-spacing:0.07em;
       }
 
       .section{
@@ -977,18 +937,18 @@
       }
 
       .bio-grid{
-        grid-template-columns:minmax(0, 1fr) minmax(135px, 42%);
-        gap:14px;
+        grid-template-columns:minmax(0, 58%) minmax(0, 42%);
+        gap:12px;
         align-items:start;
       }
 
       .bio-left{
-        padding:10px 0 16px 0;
+        padding:8px 0 12px 0;
       }
 
       .bio-text{
-        font-size:12px;
-        line-height:1.45;
+        font-size:11px;
+        line-height:1.38;
       }
 
       .bio-text p{
@@ -996,15 +956,15 @@
       }
 
       .bio-right{
-        gap:10px;
+        gap:8px;
       }
 
-      .stack-image{
-        border-radius:12px;
+      .stack-image.tall img{
+        aspect-ratio:3 / 4.5;
       }
 
-      .stack-image img{
-        aspect-ratio:3 / 4;
+      .stack-image.wide img{
+        aspect-ratio:3 / 1.55;
       }
 
       .photos-grid{
@@ -1086,34 +1046,24 @@
   </aside>
 
   <section class="hero" id="home">
-    <div class="hero-image">
-      <img src="hero-backgound.jpg" alt="Lola Grace performance photo">
-    </div>
+    <div class="hero-stage">
+      <img class="hero-bg" src="hero-backgound.jpg" alt="Lola Grace performance photo">
 
-    <div class="container hero-content">
-      <div class="hero-top hero-animate delay-1">
-        <div class="hero-top-icons">
-          <a href="https://youtube.com/@lolagrace06?si=lyduQHERA7NhZfeg" target="_blank" class="top-social" aria-label="YouTube">
+      <div class="hero-layer">
+        <div class="hero-top-icons hero-animate delay-1">
+          <a href="https://youtube.com/@lolagrace06?si=lyduQHERA7NhZfeg" target="_blank" class="hero-social" aria-label="YouTube">
             <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.5v-7L16 12l-6.4 3.5Z"/></svg>
           </a>
-          <a href="https://www.facebook.com/share/18Ts4arHZg/?mibextid=wwXIfr" target="_blank" class="top-social" aria-label="Facebook">
+          <a href="https://www.facebook.com/share/18Ts4arHZg/?mibextid=wwXIfr" target="_blank" class="hero-social" aria-label="Facebook">
             <svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.7V5c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.4V11H7.5v3H10V22h3.5Z"/></svg>
           </a>
         </div>
-      </div>
 
-      <div class="hero-middle">
-        <div class="hero-copy hero-animate delay-2">
-          <div class="name-row">
-            <div class="name-word name-word-left">Lola</div>
-            <div class="name-word name-word-right">Grace</div>
-          </div>
-          <div class="role-line">Dancer | Contortionist | Aerialist</div>
-        </div>
-      </div>
+        <div class="hero-name-left hero-animate delay-2">Lola</div>
+        <div class="hero-name-right hero-animate delay-2">Grace</div>
+        <div class="hero-role hero-animate delay-3">Dancer | Contortionist | Aerialist</div>
 
-      <div class="hero-bottom hero-animate delay-3">
-        <div class="social-row">
+        <div class="hero-bottom-icons hero-animate delay-3">
           <a href="http://www.tiktok.com/@lalarh06" target="_blank" class="hero-social" aria-label="TikTok">
             <svg viewBox="0 0 24 24"><path d="M19.6 8.5a6.7 6.7 0 0 1-4-1.3v6.1a5.5 5.5 0 1 1-5.5-5.5c.4 0 .8 0 1.2.1v2.8a2.8 2.8 0 1 0 1.5 2.5V2h2.8a4 4 0 0 0 4 4v2.5Z"/></svg>
           </a>
@@ -1140,9 +1090,9 @@
       </div>
 
       <div class="bio-right reveal">
-        <div class="stack-image"><img src="side-bio1.jpg" alt="Lola Grace portrait"></div>
-        <div class="stack-image"><img src="side-bio2.jpg" alt="Lola Grace performance image"></div>
-        <div class="stack-image"><img src="side-bio3.jpg" alt="Lola Grace dance photo"></div>
+        <div class="stack-image tall"><img src="side-bio1.jpg" alt="Lola Grace portrait"></div>
+        <div class="stack-image wide"><img src="side-bio2.jpg" alt="Lola Grace performance image"></div>
+        <div class="stack-image tall"><img src="side-bio3.jpg" alt="Lola Grace dance photo"></div>
       </div>
     </div>
   </section>
@@ -1151,22 +1101,22 @@
     <div class="container">
       <h2 class="section-title brown reveal">Photos</h2>
       <div class="photos-grid reveal">
-        <div class="photo-card"><img src="photo1.jpg" alt="Lola Grace photo 1"></div>
-        <div class="photo-card"><img src="photo2.jpg" alt="Lola Grace photo 2"></div>
-        <div class="photo-card"><img src="photo3.jpg" alt="Lola Grace photo 3"></div>
-        <div class="photo-card"><img src="photo4.jpg" alt="Lola Grace photo 4"></div>
-        <div class="photo-card"><img src="photo5.jpg" alt="Lola Grace photo 5"></div>
-        <div class="photo-card"><img src="photo6.jpg" alt="Lola Grace photo 6"></div>
-        <div class="photo-card"><img src="photo7.jpg" alt="Lola Grace photo 7"></div>
-        <div class="photo-card"><img src="photo8.jpg" alt="Lola Grace photo 8"></div>
-        <div class="photo-card"><img src="photo9.jpg" alt="Lola Grace photo 9"></div>
-        <div class="photo-card"><img src="photo10.jpg" alt="Lola Grace photo 10"></div>
-        <div class="photo-card"><img src="photo11.jpg" alt="Lola Grace photo 11"></div>
-        <div class="photo-card"><img src="photo12.jpg" alt="Lola Grace photo 12"></div>
-        <div class="photo-card"><omg scr="photo13.jpg" alt="Lola Grace photo 13"></div>
-        <div class="photo-card"><omg scr="photo14.jpg" alt="Lola Grace photo 14"></div>
-        <div class="photo-card"><omg scr="photo15.jpg" alt="Lola Grace photo 15"></div>
-        <div class="photo-card"><omg scr="photo16.jpg" alt="Lola Grace photo 16"></div>
+        <div class="photo-card"><img src="photo1.jpg" alt="Lola Grace photo 1" loading="lazy"></div>
+        <div class="photo-card"><img src="photo2.jpg" alt="Lola Grace photo 2" loading="lazy"></div>
+        <div class="photo-card"><img src="photo3.jpg" alt="Lola Grace photo 3" loading="lazy"></div>
+        <div class="photo-card"><img src="photo4.jpg" alt="Lola Grace photo 4" loading="lazy"></div>
+        <div class="photo-card"><img src="photo5.jpg" alt="Lola Grace photo 5" loading="lazy"></div>
+        <div class="photo-card"><img src="photo6.jpg" alt="Lola Grace photo 6" loading="lazy"></div>
+        <div class="photo-card"><img src="photo7.jpg" alt="Lola Grace photo 7" loading="lazy"></div>
+        <div class="photo-card"><img src="photo8.jpg" alt="Lola Grace photo 8" loading="lazy"></div>
+        <div class="photo-card"><img src="photo9.jpg" alt="Lola Grace photo 9" loading="lazy"></div>
+        <div class="photo-card"><img src="photo10.jpg" alt="Lola Grace photo 10" loading="lazy"></div>
+        <div class="photo-card"><img src="photo11.jpg" alt="Lola Grace photo 11" loading="lazy"></div>
+        <div class="photo-card"><img src="photo12.jpg" alt="Lola Grace photo 12" loading="lazy"></div>
+        <div class="photo-card"><img src="photo13.jpg" alt="Lola Grace photo 13" loading="lazy"></div>
+        <div class="photo-card"><img src="photo14.jpg" alt="Lola Grace photo 14" loading="lazy"></div>
+        <div class="photo-card"><img src="photo15.jpg" alt="Lola Grace photo 15" loading="lazy"></div>
+        <div class="photo-card"><img src="photo16.jpg" alt="Lola Grace photo 16" loading="lazy"></div>
       </div>
     </div>
   </section>
@@ -1350,12 +1300,6 @@
     menuOverlay.addEventListener("click", closeMenu);
     menuLinks.forEach(link => link.addEventListener("click", closeMenu));
 
-    document.addEventListener("keydown", (e) => {
-      if(e.key === "Escape" && !document.getElementById("lightbox").classList.contains("active")){
-        closeMenu();
-      }
-    });
-
     const reveals = document.querySelectorAll(".reveal");
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1397,8 +1341,12 @@
     });
 
     document.addEventListener("keydown", (e) => {
-      if(e.key === "Escape" && lightbox.classList.contains("active")){
-        closeLightbox();
+      if(e.key === "Escape"){
+        if(lightbox.classList.contains("active")){
+          closeLightbox();
+        } else if(sideMenu.classList.contains("active")){
+          closeMenu();
+        }
       }
     });
   </script>
